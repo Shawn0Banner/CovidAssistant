@@ -12,7 +12,7 @@ package ca.bean;
 public class User {
     private int userId;
     private String userName;
-    private double phoneNo;
+    private String phoneNo;
     private String password;
     private String address;
     private int creditPoints;
@@ -48,14 +48,14 @@ public class User {
     /**
      * @return the phoneNo
      */
-    public double getPhoneNo() {
+    public String getPhoneNo() {
         return phoneNo;
     }
 
     /**
      * @param phoneNo the phoneNo to set
      */
-    public void setPhoneNo(double phoneNo) {
+    public void setPhoneNo(String phoneNo) {
         this.phoneNo = phoneNo;
     }
 

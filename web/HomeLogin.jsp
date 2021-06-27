@@ -17,15 +17,15 @@
   <style>
     #logreg-forms{
     width:412px;
-    margin:10vh auto;
+    margin-top:2px;
     background-color:#f3f3f3;
-    box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+    box-shadow: 0 1px 3px rgb(0, 138, 230), 0 1px 2px rgb(0, 230, 0);
   transition: all 0.3s cubic-bezier(.25,.8,.25,1);
 }
 #logreg-forms form {
     width: 100%;
     max-width: 410px;
-    padding: 15px;
+    padding: 10px;
     margin: auto;
 }
 #logreg-forms .form-control {
@@ -33,7 +33,7 @@
     box-sizing: border-box;
     height: auto;
     padding: 10px;
-    font-size: 16px;
+    font-size: 14px;
 }
 #logreg-forms .form-control:focus { z-index: 2; }
 #logreg-forms .form-signin input[type="email"] {
@@ -151,12 +151,14 @@
     </div>
     <div class="collapse navbar-collapse" id="myNavbar">
       <ul class="nav navbar-nav">
-        <li><a href="#" style="color:white;margin-left: 800px">Home</a></li>
+        <li><a href="#" style="color:white;margin-left: 825px">Home</a></li>
         <li><a href="#" style="color:white">About</a></li>
-        
+        <!-- <li><a href="#">Projects</a></li> -->
         <li><a href="#" style="color:white">Contact</a></li>
       </ul>
-     
+     <!--  <ul class="nav navbar-nav navbar-right">
+        <li><a href="#"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+      </ul> -->
     </div>
   </div>
 </nav>
@@ -210,22 +212,101 @@
     </div>
   </div>
   <div class="col-sm-4">
-
-
-      <form class="form-signin" method="post" action="Login">
+ 
+<!--  <br><br> -->
+ 
+<div id="logreg-forms">
+    <form class="form-signin" method="post" action="Login">
             <h1 class="h3 mb-3 font-weight-normal" style="text-align: center"> Sign in</h1>
-            
-
+           <!--  <div class="social-login">
+                <button class="btn facebook-btn social-btn" type="button"><span><i class="fab fa-facebook-f"></i> Sign in with Facebook</span> </button>
+                <button class="btn google-btn social-btn" type="button"><span><i class="fab fa-google-plus-g"></i> Sign in with Google+</span> </button>
+            </div>
+            <p style="text-align:center"> OR  </p> -->
             <input type="tel" id="phone" name="phone" class="form-control" placeholder="Phone Number" required="" autofocus="">
             <br>
-            <input type="password" id="password" name="password" class="form-control" placeholder="Password" required="">
+            <input type="password" name="password" id="inputPassword" class="form-control" placeholder="Password" required="">
             <br>
             <button class="btn btn-success btn-block" type="submit"><i class="fas fa-sign-in-alt"></i> Sign in</button>
-            
+            <!-- <a href="#" id="forgot_pswd">Forgot password?</a> -->
             <br>
-             <p style="text-align:center">Don't have an account!</p>  
+            <p style="text-align: center">Don't have an account!</p> 
             <button class="btn btn-primary btn-block" type="button" id="btn-signup"><i class="fas fa-user-plus"></i> Sign up New Account</button>
             </form>
+
+            <!-- <form action="/reset/password/" class="form-reset">
+                <input type="email" id="resetEmail" class="form-control" placeholder="Email address" required="" autofocus="">
+                <button class="btn btn-primary btn-block" type="submit">Reset Password</button>
+                <a href="#" id="cancel_reset"><i class="fas fa-angle-left"></i> Back</a>
+            </form> -->
+            
+            <form method="post" action="Register" class="form-signup">
+                <!-- <div class="social-login">
+                    <button class="btn facebook-btn social-btn" type="button"><span><i class="fab fa-facebook-f"></i> Sign up with Facebook</span> </button>
+                </div>
+                <div class="social-login">
+                    <button class="btn google-btn social-btn" type="button"><span><i class="fab fa-google-plus-g"></i> Sign up with Google+</span> </button>
+                </div> -->
+                
+                <h1 class="h3 mb-3 font-weight-normal" style="text-align: center"> Sign Up</h1>
+
+                <input type="text" id="user-name" name="name" class="form-control" placeholder="Full name" required="" autofocus="">
+                <input type="tel" id="user-email" name="phone" class="form-control" placeholder="Phone Number" required autofocus="">
+                <input type="text" id="user-pass" name="address" class="form-control" placeholder="Address" required autofocus="">
+                <input type="password" id="user-repeatpass" name="password" class="form-control" placeholder="Password" required autofocus="">
+
+                <button class="btn btn-primary btn-block" type="submit"><i class="fas fa-user-plus"></i> Sign Up</button>
+                <a href="#" id="cancel_signup"><i class="fas fa-angle-left"></i> Back</a>
+            </form>
+            <br>
+            
+    </div>
+    <p style="text-align:center">
+        <a href="http://bit.ly/2RjWFMfunction toggleResetPswd(e){
+    e.preventDefault();
+    $('#logreg-forms .form-signin').toggle() // display:block or none
+    $('#logreg-forms .form-reset').toggle() // display:block or none
+}
+
+function toggleSignUp(e){
+    e.preventDefault();
+    $('#logreg-forms .form-signin').toggle(); // display:block or none
+    $('#logreg-forms .form-signup').toggle(); // display:block or none
+}
+
+$(()=>{
+    // Login Register Form
+    $('#logreg-forms #forgot_pswd').click(toggleResetPswd);
+    $('#logreg-forms #cancel_reset').click(toggleResetPswd);
+    $('#logreg-forms #btn-signup').click(toggleSignUp);
+    $('#logreg-forms #cancel_signup').click(toggleSignUp);
+})g" target="_blank" style="color:black"></a>
+    </p>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    <script src="/script.js"></script>
+    <script type="text/javascript">
+    function toggleResetPswd(e){
+    e.preventDefault();
+    $('#logreg-forms .form-signin').toggle() // display:block or none
+    $('#logreg-forms .form-reset').toggle() // display:block or none
+}
+
+function toggleSignUp(e){
+    e.preventDefault();
+    $('#logreg-forms .form-signin').toggle(); // display:block or none
+    $('#logreg-forms .form-signup').toggle(); // display:block or none
+}
+
+$(()=>{
+    // Login Register Form
+    $('#logreg-forms #forgot_pswd').click(toggleResetPswd);
+    $('#logreg-forms #cancel_reset').click(toggleResetPswd);
+    $('#logreg-forms #btn-signup').click(toggleSignUp);
+    $('#logreg-forms #cancel_signup').click(toggleSignUp);
+})
+</script>
+
 
 
 
@@ -297,10 +378,13 @@
   </div>
 </div><br>
 
+
+
 <footer class="container-fluid text-center">
   <p>Footer Text</p>
 </footer>
 
 </body>
 </html>
+
 
