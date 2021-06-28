@@ -44,7 +44,7 @@ public class Login extends HttpServlet {
 
             System.out.println(phone);
             System.out.println(password);
-            
+
             InputStream inputFile = getServletContext().getResourceAsStream("/WEB-INF/db_params.properties");
             System.out.println(inputFile);
 

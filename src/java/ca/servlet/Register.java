@@ -43,21 +43,18 @@ public class Register extends HttpServlet {
         Connection conn = null;
         InputStream inputFile = getServletContext().getResourceAsStream("/WEB-INF/db_params.properties");
         try (PrintWriter out = response.getWriter()) {
-           User newUser = new User();
+            User newUser = new User();
 
-           
             newUser.setUserName(request.getParameter("name"));
             newUser.setPhoneNo(request.getParameter("phone"));
             newUser.setAddress(request.getParameter("address"));
             newUser.setPassword(request.getParameter("password"));
-          
-            //our system will treat every new user register as a user type and not admin type
-            //our system only has one admin only         
 
+            
             conn = ConnectionProviderToDB.getConnectionObject().getConnection(inputFile);
 
             Statement stmt = conn.createStatement();
-            ResultSet rs = stmt.executeQuery("select * from user where phoneNo='" + newUser.getPhoneNo()+"'");
+            ResultSet rs = stmt.executeQuery("select * from user where phoneNo='" + newUser.getPhoneNo() + "'");
 
             if (rs.next()) {
                 System.out.println("Email Address Already Present");
@@ -75,7 +72,7 @@ public class Register extends HttpServlet {
 
                 if (r > 0) {
                     System.out.println("New user created SUCCESSFULLY");
-                    
+
                     HttpSession session = request.getSession();
                     User user = new User();
                     user.setUserId(newUser.getUserId());
