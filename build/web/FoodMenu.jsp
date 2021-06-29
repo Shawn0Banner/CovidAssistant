@@ -154,7 +154,7 @@
   top:0; right: 0;
   width:0%;
   height:100%;
-  background:var(--red);
+  background c:var(--red);
   transition: .3s linear;
   z-index: -1;
 }
@@ -184,7 +184,7 @@ a.btn {
   border-radius: 6px;
   text-align: center;
   border:.1rem solid var(--red);
- color: var(--red);
+ color : var(--red);
  font-weight: bold;
 
 }
