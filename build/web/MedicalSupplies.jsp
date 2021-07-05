@@ -13,12 +13,81 @@
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" integrity="sha512-PgQMlq+nqFLV4ylk1gwUOgm6CtIIXkKwaIHp/PAIWHzig/lKZSEGKEysh0TCVbHJXCLN7WetD8TFecIky75ZfQ==" crossorigin="anonymous" />
         <link rel="stylesheet" type="text/css" href="css/style1.css">
         <title>ThapaCart</title>
+        <style>
+            .navbar-light .navbar-brand {
+                color: #fff;
+                font-size: 25px;
+
+                font-weight: bold;
+                letter-spacing: 2px;
+            }
+
+            .navbar-light .navbar-nav .active > .nav-link, .navbar-light .navbar-nav .nav-link.active, .navbar-light .navbar-nav .nav-link.show, .navbar-light .navbar-nav .show > .nav-link {
+                color: #fff;
+            }
+
+            .navbar-light .navbar-nav .nav-link {
+                color: #fff;
+            }
+
+            .navbar-toggler {
+                background: #fff;
+            }
+
+            .navbar-nav {
+                text-align: center;
+            }
+
+            .nav-link {
+                padding: .2rem 1rem;
+            }
+
+            .nav-link.active,.nav-link:focus{
+                color: #fff;
+            }
+
+            .navbar-toggler {
+                padding: 1px 5px;
+                font-size: 18px;
+                line-height: 0.3;
+            }
+
+            .navbar-light .navbar-nav .nav-link:focus, .navbar-light .navbar-nav .nav-link:hover {
+                color: #fff;
+            }
+        </style>
     </head>
-     
+
     <body class="bg-light">
-        
-   
-        <div class="container-fluid">
+        <!-- Navigation -->
+        <nav class="navbar navbar-expand-lg navbar-light fixed-top" style="background-color: green">
+            <div class="container">
+                <a class="navbar-brand" href="#">CovidCare</a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+
+
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav ml-auto">
+                        <li class="nav-item active">
+                            <a class="nav-link" href="UserHome.jsp"><i class="fa fa-home" style="font-size:24px"></i></a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#"><i class="fa fa-shopping-cart" style="font-size:24px"></i></a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link" href="Logout"><i class="fa fa-power-off" style="font-size:24px"></i></a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+
+
+        <div class="container-fluid" style="padding-top: 70px;">
             <div class="row">
                 <div class="col-md-10 col-11 mx-auto">
                     <div class="row mt-5 gx-3">
@@ -26,14 +95,14 @@
                         <div class="col-md-12 col-lg-8 col-11 mx-auto main_cart mb-lg-0 mb-5 shadow">
 
 
-                            <%                InputStream inputFile = getServletContext().getResourceAsStream("/WEB-INF/db_params.properties");
+                            <%          InputStream inputFile = getServletContext().getResourceAsStream("/WEB-INF/db_params.properties");
                                 System.out.println(inputFile);
 
                                 Connection con = null;
 
                                 con = ConnectionProviderToDB.getConnectionObject().getConnection(inputFile);
 
-                                PreparedStatement ps1 = con.prepareStatement("SELECT foodId, foodName, price, status, imgLink FROM foodmenu WHERE status='Available'");
+                                PreparedStatement ps1 = con.prepareStatement("SELECT medId, medName, status,expirationDate,price,imgLink FROM medicalsupplies WHERE status='Available'");
                                 ResultSet rs = ps1.executeQuery();
 
                                 while (rs.next()) {
@@ -42,7 +111,7 @@
 
 
                             <div class="card p-4">
-                                <!-- <h2 class="py-4 font-weight-bold">Cart (2 items)</h2> -->
+                                <!--<h2 class="py-4 font-weight-bold">Cart (2 items)</h2> -->
                                 <div class="row">
                                     <!-- cart images div -->
                                     <div class="col-md-5 col-11 mx-auto bg-light d-flex justify-content-center align-items-center shadow product_img">
@@ -53,22 +122,23 @@
                                         <div class="row">
                                             <!-- product name  -->
                                             <div class="col-6 card-title">
-                                                <h2 class="mb-4 product_name"><%= rs.getString("foodName")%></h2>
+                                                <h2 class="mb-4 product_name"><%= rs.getString("medName")%></h2>
                                                 <p class="mb-2"></p>
-                                                <p class="mb-2" id="p<%= rs.getInt("foodId")%>"><%= rs.getDouble("price")%></p>
+                                                <p class="mb-2" id="p<%= rs.getInt("medId")%>"><%= rs.getDouble("price")%></p>
+                                                <p class="mb-2" id="c<%= rs.getInt("medId")%>">Exp Date: <%= rs.getString("expirationDate")%></p>
                                                 <!--<p class="mb-3">SIZE: M</p>-->
                                             </div>
                                             <!-- quantity inc dec -->
                                             <div class="col-6">
                                                 <ul class="pagination justify-content-end set_quantity">
                                                     <li class="page-item">
-                                                        <button class="page-link " onclick="decreaseNumber('<%= rs.getInt("foodId")%>', '<%= rs.getString("foodName")%>', 'p<%= rs.getInt("foodId")%>')" >
+                                                        <button class="page-link " onclick="decreaseNumber('<%= rs.getInt("medId")%>', '<%= rs.getString("medName")%>', 'p<%= rs.getInt("medId")%>')" >
                                                             <i class="fas fa-minus"></i> </button>
                                                     </li>
-                                                    <li class="page-item"><input type="text" name="" class="page-link" value="0" id="<%= rs.getInt("foodId")%>" >
+                                                    <li class="page-item"><input type="text" name="" class="page-link" value="0" id="<%= rs.getInt("medId")%>" >
                                                     </li>
                                                     <li class="page-item">
-                                                        <button class="page-link" onclick="increaseNumber('<%= rs.getInt("foodId")%>', '<%= rs.getString("foodName")%>', 'p<%= rs.getInt("foodId")%>')" > <i class="fas fa-plus"></i></button>
+                                                        <button class="page-link" onclick="increaseNumber('<%= rs.getInt("medId")%>', '<%= rs.getString("medName")%>', 'p<%= rs.getInt("medId")%>')" > <i class="fas fa-plus"></i></button>
                                                     </li>
                                                 </ul>
                                             </div>
@@ -76,11 +146,11 @@
                                         <!-- //remover move and price -->
                                         <div class="row">
                                             <div class="col-8 d-flex justify-content-between remove_wish">
-<!--                                                <p><i class="fas fa-trash-alt"></i> REMOVE ITEM</p>
-                                                <p><i class="fas fa-heart"></i>MOVE TO WISH LIST </p>-->
+                                                <!--                                                <p><i class="fas fa-trash-alt"></i> REMOVE ITEM</p>
+                                                                                                <p><i class="fas fa-heart"></i>MOVE TO WISH LIST </p>-->
                                             </div>
                                             <div class="col-4 d-flex justify-content-end price_money">
-                                                <h4>Rs. <span id="<%= rs.getString("foodName")%>">0.00 </span></h4>
+                                                <h4>Rs. <span id="<%= rs.getString("medName")%>">0.00 </span></h4>
                                             </div>
                                         </div>
                                     </div>
@@ -100,42 +170,37 @@
 
                         <!-- right side div -->
                         <div class="col-md-12 col-lg-4 col-11 mx-auto mt-lg-0 mt-md-5">
-                            
+
                             <div class="right_side p-3 shadow bg-white">
-                                <h2 class="product_name mb-5">The Total Amount Of</h2>
+                                <h2 class="product_name mb-5">The Total Amount</h2>
                                 <div class="price_indiv d-flex justify-content-between">
                                     <p>Product amount</p>
                                     <p>Rs. <span id="product_total_amt">0.00</span></p>
                                 </div>
                                 <div class="price_indiv d-flex justify-content-between">
                                     <p>Shipping Charge</p>
-                                    <p>Rs. <span id="shipping_charge">50.0</span></p>
+                                    <p>Rs. <span id="shipping_charge">20.0</span></p>
                                 </div>
                                 <hr />
-                                <form method="Post" action="Checkout">
                                 <div class="total-amt d-flex justify-content-between font-weight-bold">
-                                    <p>The total amount of (including VAT)</p>
-                                    <p>Rs.<span id="total_cart_amt" name="TotalAmt" value="">0.00</span></p>
-                                    <input type="hidden" name="Total" id="Total" />
-                                    <input type="hidden" name="Type" value="Food" />
+                                    <p>The total amount (GST included)</p>
+                                    <p>Rs.<span id="total_cart_amt" name="TotalAmt">0.00</span></p>
                                 </div>
-                          
-                                    <button type="submit" class="btn btn-primary text-uppercase">Checkout</button>
-                                </form>
+                                <button class="btn btn-primary text-uppercase" onclick="window.location.href = 'pay.jsp'">Checkout</button>
                             </div>
-                           
+
                             <!-- discount code part -->
                             <div class="discount_code mt-3 shadow">
                                 <div class="card">
                                     <div class="card-body">
                                         <a class="d-flex justify-content-between" data-toggle="collapse" href="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
-                                            Add a discount code (optional)
+                                            Add a promo code (optional)
                                             <span><i class="fas fa-chevron-down pt-1"></i></span>
                                         </a>
                                         <div class="collapse" id="collapseExample">
                                             <div class="mt-3">
                                                 <input type="text" name="" id="discount_code1" class="form-control font-weight-bold" placeholder="Enter the discount code">
-                                                <small id="error_trw" class="text-dark mt-3">code is thapa</small>
+                                                <small id="error_trw" class="text-dark mt-3">code is covid15</small>
                                             </div>
                                             <button class="btn btn-primary btn-sm mt-3" onclick="discount_code()">Apply</button>
                                         </div>
@@ -145,12 +210,12 @@
 
 
                             <!-- discount code ends -->
-<!--                            <div class="mt-3 shadow p-3 bg-white">
-                                <div class="pt-4">
-                                    <h5 class="mb-4">Expected delivery date</h5>
-                                    <p>July 27th 2020 - July 29th 2020</p>
-                                </div>
-                            </div>-->
+                            <!--                            <div class="mt-3 shadow p-3 bg-white">
+                                                            <div class="pt-4">
+                                                                <h5 class="mb-4">Expected delivery date</h5>
+                                                                <p>July 27th 2020 - July 29th 2020</p>
+                                                            </div>
+                                                        </div>-->
                         </div>
                     </div>
                 </div>
@@ -183,7 +248,6 @@
                                                         itemprice.innerHTML = parseInt(itemprice.innerHTML) - parseInt(price.innerHTML);
                                                         product_total_amt.innerHTML = parseInt(product_total_amt.innerHTML) - parseInt(price.innerHTML);
                                                         total_cart_amt.innerHTML = parseInt(product_total_amt.innerHTML) + parseInt(shipping_charge.innerHTML);
-                                                        Total.value=total_cart_amt.innerHTML;
                                                     }
                                                 }
                                                 const increaseNumber = (incdec, itemprice, iprice) => {
@@ -201,22 +265,21 @@
                                                         itemprice.innerHTML = parseInt(itemprice.innerHTML) + parseInt(price.innerHTML);
                                                         product_total_amt.innerHTML = parseInt(product_total_amt.innerHTML) + parseInt(price.innerHTML);
                                                         total_cart_amt.innerHTML = parseInt(product_total_amt.innerHTML) + parseInt(shipping_charge.innerHTML);
-                                                        Total.value = total_cart_amt.innerHTML;
                                                     }
                                                 }
 
                                                 const  discount_code = () => {
                                                     let totalamtcurr = parseInt(total_cart_amt.innerHTML);
                                                     let error_trw = document.getElementById('error_trw');
-                                                    if (discountCode.value === 'thapa') {
-                                                        let newtotalamt = totalamtcurr - 15;
+                                                    if (discountCode.value === 'covid15') {
+                                                        let newtotalamt = totalamtcurr - (totalamtcurr*15/100);
                                                         total_cart_amt.innerHTML = newtotalamt;
-                                                        error_trw.innerHTML = "Hurray! code is valid";
+                                                        error_trw.innerHTML = "Promocode applied!!";
                                                     } else {
-                                                        error_trw.innerHTML = "Try Again! Valid code is thapa";
+                                                        error_trw.innerHTML = "Try Again! That is not a valid code.";
                                                     }
                                                 }
         </script>
-        
+
     </body>
 </html>

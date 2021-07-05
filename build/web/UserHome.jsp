@@ -303,7 +303,7 @@ width: 80%;
 		<div class="container">
 			<div class="row">
 				
-				<div class="col-lg-4 col-12">
+				<div class="col-lg-4 offset-lg-2 col-12">
 					<div class="card text-center">
 						<div class="card-header">Stay Healthy</div>
 						<div class="card-body"> <img src="https://source.unsplash.com/300x350/?restaurent,salad" alt="Image" style=""></div>
@@ -317,17 +317,17 @@ width: 80%;
 						<div class="card-body">
 							 <img src="https://source.unsplash.com/300x350/?pharmacy" alt="Image">
 						</div>
-						<div class="card-footer"><a href="#"> Medicine</a></div>
+						<div class="card-footer"><a href="MedicalSupplies.jsp"> Medicine</a></div>
 					</div>
 				</div>
 
-				<div class="col-lg-4 col-12">
+<!--				<div class="col-lg-4 col-12">
 					<div class="card text-center">
 						<div class="card-header">Stay Safe</div>
 						<div class="card-body"> <img src="https://source.unsplash.com/300x350/?ambulance" alt="Image" style=""></div>
 						<div class="card-footer"><a href="#">Ambulance</a></div>
 					</div>
-				</div>
+				</div>-->
 
 
 				</div>

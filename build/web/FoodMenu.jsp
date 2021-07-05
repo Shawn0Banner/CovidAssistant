@@ -17,8 +17,7 @@
      
     <body class="bg-light">
         
-        <% String TotalAmt = request.getParameter("TotalAmt");
-        session.setAttribute("TotalAmt",TotalAmt);%>
+   
         <div class="container-fluid">
             <div class="row">
                 <div class="col-md-10 col-11 mx-auto">
@@ -113,11 +112,16 @@
                                     <p>Rs. <span id="shipping_charge">50.0</span></p>
                                 </div>
                                 <hr />
+                                <form method="Post" action="Checkout">
                                 <div class="total-amt d-flex justify-content-between font-weight-bold">
                                     <p>The total amount of (including VAT)</p>
-                                    <p>Rs.<span id="total_cart_amt" name="TotalAmt">0.00</span></p>
+                                    <p>Rs.<span id="total_cart_amt" name="TotalAmt" value="">0.00</span></p>
+                                    <input type="hidden" name="Total" id="Total" />
+                                    <input type="hidden" name="Type" value="Food" />
                                 </div>
-                                <button class="btn btn-primary text-uppercase" onclick="window.location.href = 'pay.jsp'">Checkout</button>
+                          
+                                    <button type="submit" class="btn btn-primary text-uppercase">Checkout</button>
+                                </form>
                             </div>
                            
                             <!-- discount code part -->
@@ -179,6 +183,7 @@
                                                         itemprice.innerHTML = parseInt(itemprice.innerHTML) - parseInt(price.innerHTML);
                                                         product_total_amt.innerHTML = parseInt(product_total_amt.innerHTML) - parseInt(price.innerHTML);
                                                         total_cart_amt.innerHTML = parseInt(product_total_amt.innerHTML) + parseInt(shipping_charge.innerHTML);
+                                                        Total.value=total_cart_amt.innerHTML;
                                                     }
                                                 }
                                                 const increaseNumber = (incdec, itemprice, iprice) => {
@@ -196,6 +201,7 @@
                                                         itemprice.innerHTML = parseInt(itemprice.innerHTML) + parseInt(price.innerHTML);
                                                         product_total_amt.innerHTML = parseInt(product_total_amt.innerHTML) + parseInt(price.innerHTML);
                                                         total_cart_amt.innerHTML = parseInt(product_total_amt.innerHTML) + parseInt(shipping_charge.innerHTML);
+                                                        Total.value = total_cart_amt.innerHTML;
                                                     }
                                                 }
 
