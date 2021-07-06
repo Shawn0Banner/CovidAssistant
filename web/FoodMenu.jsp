@@ -13,12 +13,86 @@
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" integrity="sha512-PgQMlq+nqFLV4ylk1gwUOgm6CtIIXkKwaIHp/PAIWHzig/lKZSEGKEysh0TCVbHJXCLN7WetD8TFecIky75ZfQ==" crossorigin="anonymous" />
         <link rel="stylesheet" type="text/css" href="css/style1.css">
         <title>ThapaCart</title>
+         <script type="text/javascript">
+            window.history.forward();
+            function noBack()
+            {
+                window.history.forward();
+            }
+        </script>
+        <style>
+            .navbar-light .navbar-brand {
+                color: #fff;
+                font-size: 25px;
+
+                font-weight: bold;
+                letter-spacing: 2px;
+            }
+
+            .navbar-light .navbar-nav .active > .nav-link, .navbar-light .navbar-nav .nav-link.active, .navbar-light .navbar-nav .nav-link.show, .navbar-light .navbar-nav .show > .nav-link {
+                color: #fff;
+            }
+
+            .navbar-light .navbar-nav .nav-link {
+                color: #fff;
+            }
+
+            .navbar-toggler {
+                background: #fff;
+            }
+
+            .navbar-nav {
+                text-align: center;
+            }
+
+            .nav-link {
+                padding: .2rem 1rem;
+            }
+
+            .nav-link.active,.nav-link:focus{
+                color: #fff;
+            }
+
+            .navbar-toggler {
+                padding: 1px 5px;
+                font-size: 18px;
+                line-height: 0.3;
+            }
+
+            .navbar-light .navbar-nav .nav-link:focus, .navbar-light .navbar-nav .nav-link:hover {
+                color: #fff;
+            }
+        </style>
     </head>
      
-    <body class="bg-light">
-        
+    <body class="bg-light" onLoad="noBack();" onpageshow="if (event.persisted) noBack();" onUnload="">
+        <nav class="navbar navbar-expand-lg navbar-light fixed-top" style="background-color: green">
+            <div class="container">
+                <a class="navbar-brand" href="#">CovidCare</a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+
+
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav ml-auto">
+                        <li class="nav-item active">
+                            <a class="nav-link" href="UserHome.jsp"><i class="fa fa-home" style="font-size:20px"></i></a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="MyOrders.jsp"><i class="fa fa-shopping-cart" style="font-size:20px"></i></a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link" href="Logout"><i class="fa fa-power-off" style="font-size:20px"></i></a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
    
-        <div class="container-fluid">
+        <div class="container-fluid" style="padding-top: 70px;">
             <div class="row">
                 <div class="col-md-10 col-11 mx-auto">
                     <div class="row mt-5 gx-3">

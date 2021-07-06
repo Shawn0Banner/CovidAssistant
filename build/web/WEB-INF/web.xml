@@ -37,6 +37,10 @@
         <servlet-name>ConfirmOrder</servlet-name>
         <servlet-class>ca.servlet.ConfirmOrder</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>Cancel</servlet-name>
+        <servlet-class>ca.servlet.Cancel</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>action</servlet-name>
         <url-pattern>*.do</url-pattern>
@@ -60,6 +64,10 @@
     <servlet-mapping>
         <servlet-name>ConfirmOrder</servlet-name>
         <url-pattern>/ConfirmOrder</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>Cancel</servlet-name>
+        <url-pattern>/Cancel</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

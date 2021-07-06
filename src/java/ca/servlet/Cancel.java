@@ -10,11 +10,6 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.PrintWriter;
 import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -24,7 +19,7 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author hp
  */
-public class ConfirmOrder extends HttpServlet {
+public class Cancel extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -36,43 +31,13 @@ public class ConfirmOrder extends HttpServlet {
      * @throws IOException if an I/O error occurs
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException{
+            throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-       int userId = Integer.parseInt(request.getParameter("userId"));
-           String type = request.getParameter("type");
-           String address = request.getParameter("address");
-           String totalPrice = request.getParameter("totalPrice");
-           String status = "Order Placed";
-            Connection conn = null;
+        Connection con = null;
 
-        InputStream inputFile = getServletContext().getResourceAsStream("/WEB-INF/db_params.properties");
         try (PrintWriter out = response.getWriter()) {
-           conn = ConnectionProviderToDB.getConnectionObject().getConnection(inputFile);
-           PreparedStatement ps = conn.prepareStatement("INSERT into covid_assistant.order(userId, orderType, totalPrice, status, address, orderDate) values (?,?,?,?,?,CURDATE())");
-            ps.setInt(1, userId);
-            ps.setString(2, type);
-            ps.setString(3, totalPrice);
-            ps.setString(4, status);
-            ps.setString(5, address );
-            int r = 0;
-            r = ps.executeUpdate();
-
-                    if (r > 0) {
-                        System.out.println("Order Placed");
-                        request.setAttribute("userId", userId);
-                        RequestDispatcher rd = request.getRequestDispatcher("MyOrders.jsp");
-                        rd.forward(request, response);
-                    } else {
-                        System.out.println("Order Failed");
-                    }
-        }catch (Exception e) {
-            System.out.println(e);
-        } finally {
-            try {
-                conn.close();
-            } catch (SQLException ex) {
-                Logger.getLogger(ConfirmOrder.class.getName()).log(Level.SEVERE, null, ex);
-            }
+           
+           
         }
     }
 

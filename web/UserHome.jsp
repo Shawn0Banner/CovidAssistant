@@ -260,7 +260,9 @@ width: 80%;
 
     </head>
 
-    <body id="page-top" onLoad="noBack();" onpageshow="if (event.persisted) noBack();" onUnload="">
+    <body id="page-top" 
+          
+          >
 
         <%
             User user = (User) request.getSession().getAttribute("user");
@@ -278,15 +280,15 @@ width: 80%;
    
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav ml-auto">
-        <li class="nav-item active">
-          <a class="nav-link" href="#">Home</a>
-        </li>
+<!--        <li class="nav-item active">
+          <a class="nav-link" href="">Home</a>
+        </li>-->
         <li class="nav-item">
-          <a class="nav-link" href="#">CheckOut</a>
+          <a class="nav-link" href="MyOrders.jsp"><i class="fa fa-shopping-cart" style="font-size:20px"></i></a>
         </li>
         
         <li class="nav-item">
-          <a class="nav-link" href="#">Contact</a>
+          <a class="nav-link" href="Logout"><i class="fa fa-power-off" style="font-size:20px"></i></a>
         </li>
       </ul>
     </div>

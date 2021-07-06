@@ -22,6 +22,13 @@
    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" integrity="sha512-iBBXm8fW90+nuLcSKlbmrPcLa0OT92xO1BIsZ+ywDWZCvqsWgccV3gFoRBv0z+8dLJgyAHIhR35VZc2oM/gI1w==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 
    <!-- custom css -->
+   <script type="text/javascript">
+            window.history.forward();
+            function noBack()
+            {
+                window.history.forward();
+            }
+        </script>
 <script>
             function myFunction() {
                 // Declare variables
@@ -121,7 +128,7 @@
 /* ignore the code below */
 
 
-.link-area
+/*.link-area
 {
   position:fixed;
   bottom:20px;
@@ -311,14 +318,15 @@ a.btn {
     .cart-qty-minus:hover {
     background-color: #5161ce
     color: #fff;
-    }
+    }*/
     </style>
   </head>
-<body>
+<body onLoad="noBack();" onpageshow="if (event.persisted) noBack();" onUnload="">
 <%
             User user = (User) request.getSession().getAttribute("user");
+            
         %>
-<nav class="navbar navbar-expand-lg navbar-light fixed-top" style="background-color: #2eb82e">
+<nav class="navbar navbar-expand-lg navbar-light fixed-top" style="background-color: green">
   <div class="container">
     <a class="navbar-brand" href="#">CovidCare</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -330,35 +338,36 @@ a.btn {
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav ml-auto">
         <li class="nav-item active">
-          <a class="nav-link" href="#">Home</a>
+          <a class="nav-link" href="UserHome.jsp"><i class="fa fa-home" style="font-size:20px"></i></a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="#">CheckOut</a>
+          <a class="nav-link" href="Logout"><i class="fa fa-power-off" style="font-size:20px"></i></a>
         </li>
         
-        <li class="nav-item">
+<!--        <li class="nav-item">
           <a class="nav-link" href="#">Contact</a>
-        </li>
+        </li>-->
       </ul>
     </div>
   </div>
 </nav>
 <div class="table-responsive" id="sailorTableArea">
-            <br><br>
-            <input type="text" id="myInput" onkeyup="myFunction()" placeholder="Search by Name..">
-
+    <br><br><br>
+            <input type="text" id="myInput" onkeyup="myFunction()" placeholder="Search by Order Id.."/>
+            <br>
             <table  class="table table-striped table-bordered" width="100%">
                 <thead>
 
                     <tr>
-                        <th scope="col">Model No</th>
-                        <th scope="col">Type</th>
-                        <th scope="col">Department</th>
-                        <th scope="col">Value</th>
+                        <th scope="col">Order Id</th>
+                        <th scope="col">Order Type</th>
+                        <th scope="col">Amount</th>
+                        <th scope="col">Date</th>
                         <th scope="col">Status</th>
-                        <th scope="col">Send for Repair</th>
-                        <th scope="col">Add to Assets</th>
-                        <!--                    <th scope="col">info</th>-->
+                       
+                        
+                       
+                       
                     </tr>
                 </thead>
 
@@ -370,7 +379,7 @@ a.btn {
 
                         con = ConnectionProviderToDB.getConnectionObject().getConnection(inputFile);
 
-                        PreparedStatement ps1 = con.prepareStatement("SELECT orderId, orderType, totalPrice, orderDate, status FROM order WHERE userId=?");
+                        PreparedStatement ps1 = con.prepareStatement("SELECT orderId, orderType, totalPrice, orderDate, status FROM covid_assistant.order WHERE userId=? order by orderId desc");
                          ps1.setInt(1, user.getUserId());
                         ResultSet rs = ps1.executeQuery();
 
@@ -382,10 +391,8 @@ a.btn {
                         <td><%= rs.getString("totalPrice")%></td>
                         <td><%= rs.getString("orderDate")%></td>
                         <td><%= rs.getString("status")%></td>
-<!--                        <td><button type="button" class="btn btn-secondary" onclick="window.location.href = 'Repair?modelNo=<%= rs.getInt("modelNo")%>&category=departmentalasset'">Repair</button><td>
-                            <button type="submit" class="btn btn-secondary" onclick="window.location.href = 'Return?modelNo=<%= rs.getInt("modelNo")%>&category=departmentalasset'">Add</button>   -->
-
-                    </tr>
+                       
+                  </tr>
                     <%}
 
                         //System.out.println("</table>");  

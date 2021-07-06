@@ -13,6 +13,13 @@
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" integrity="sha512-PgQMlq+nqFLV4ylk1gwUOgm6CtIIXkKwaIHp/PAIWHzig/lKZSEGKEysh0TCVbHJXCLN7WetD8TFecIky75ZfQ==" crossorigin="anonymous" />
         <link rel="stylesheet" type="text/css" href="css/style1.css">
         <title>ThapaCart</title>
+         <script type="text/javascript">
+            window.history.forward();
+            function noBack()
+            {
+                window.history.forward();
+            }
+        </script>
         <style>
             .navbar-light .navbar-brand {
                 color: #fff;
@@ -58,7 +65,7 @@
         </style>
     </head>
 
-    <body class="bg-light">
+    <body class="bg-light" onLoad="noBack();" onpageshow="if (event.persisted) noBack();" onUnload="">
         <!-- Navigation -->
         <nav class="navbar navbar-expand-lg navbar-light fixed-top" style="background-color: green">
             <div class="container">
@@ -72,14 +79,14 @@
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav ml-auto">
                         <li class="nav-item active">
-                            <a class="nav-link" href="UserHome.jsp"><i class="fa fa-home" style="font-size:24px"></i></a>
+                            <a class="nav-link" href="UserHome.jsp"><i class="fa fa-home" style="font-size:20px"></i></a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#"><i class="fa fa-shopping-cart" style="font-size:24px"></i></a>
+                            <a class="nav-link" href="MyOrders.jsp"><i class="fa fa-shopping-cart" style="font-size:20px"></i></a>
                         </li>
 
                         <li class="nav-item">
-                            <a class="nav-link" href="Logout"><i class="fa fa-power-off" style="font-size:24px"></i></a>
+                            <a class="nav-link" href="Logout"><i class="fa fa-power-off" style="font-size:20px"></i></a>
                         </li>
                     </ul>
                 </div>
@@ -182,13 +189,16 @@
                                     <p>Rs. <span id="shipping_charge">20.0</span></p>
                                 </div>
                                 <hr />
+                                <form method="Post" action="Checkout">
                                 <div class="total-amt d-flex justify-content-between font-weight-bold">
                                     <p>The total amount (GST included)</p>
-                                    <p>Rs.<span id="total_cart_amt" name="TotalAmt">0.00</span></p>
+                                    <p>Rs.<span id="total_cart_amt" name="TotalAmt" value="">0.00</span></p>
+                                    <input type="hidden" name="Total" id="Total" />
+                                    <input type="hidden" name="Type" value="MedicalSupplies" />
                                 </div>
-                                <button class="btn btn-primary text-uppercase" onclick="window.location.href = 'pay.jsp'">Checkout</button>
+                                <button class="btn btn-primary text-uppercase" type="submit">Checkout</button>
+                                </form>
                             </div>
-
                             <!-- discount code part -->
                             <div class="discount_code mt-3 shadow">
                                 <div class="card">
@@ -248,6 +258,7 @@
                                                         itemprice.innerHTML = parseInt(itemprice.innerHTML) - parseInt(price.innerHTML);
                                                         product_total_amt.innerHTML = parseInt(product_total_amt.innerHTML) - parseInt(price.innerHTML);
                                                         total_cart_amt.innerHTML = parseInt(product_total_amt.innerHTML) + parseInt(shipping_charge.innerHTML);
+                                                        Total.value = total_cart_amt.innerHTML;
                                                     }
                                                 }
                                                 const increaseNumber = (incdec, itemprice, iprice) => {
@@ -265,6 +276,7 @@
                                                         itemprice.innerHTML = parseInt(itemprice.innerHTML) + parseInt(price.innerHTML);
                                                         product_total_amt.innerHTML = parseInt(product_total_amt.innerHTML) + parseInt(price.innerHTML);
                                                         total_cart_amt.innerHTML = parseInt(product_total_amt.innerHTML) + parseInt(shipping_charge.innerHTML);
+                                                        Total.value = total_cart_amt.innerHTML;
                                                     }
                                                 }
 
