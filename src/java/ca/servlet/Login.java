@@ -65,14 +65,16 @@ public class Login extends HttpServlet {
                     User user = new User();
                     user.setUserId(rs.getInt("userId"));
                     user.setUserName(rs.getString("userName"));
+                    user.setCreditPoints(rs.getInt("creditPoints"));
                     session.setAttribute("user", user);
                     rd.forward(request, response);
 
                 } else {
                     //failed validation
                     System.out.println("Login Not Successful...........");
+                    out.print("<script>alert('Invalid Input'); window.location.href='HomeLogin.jsp';</script>");
                     request.setAttribute("error", "Invalid Username or Password");
-                    RequestDispatcher rd = request.getRequestDispatcher("Login.jsp");
+                    RequestDispatcher rd = request.getRequestDispatcher("HomeLogin.jsp");
                     rd.include(request, response);
                 }
 

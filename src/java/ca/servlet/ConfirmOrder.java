@@ -5,6 +5,7 @@
  */
 package ca.servlet;
 
+import ca.bean.User;
 import ca.utilities.ConnectionProviderToDB;
 import java.io.IOException;
 import java.io.InputStream;
@@ -42,6 +43,7 @@ public class ConfirmOrder extends HttpServlet {
            String type = request.getParameter("type");
            String address = request.getParameter("address");
            String totalPrice = request.getParameter("totalPrice");
+           int cp = Integer.parseInt(request.getParameter("cp"));
            String status = "Order Placed";
             Connection conn = null;
 
@@ -59,9 +61,19 @@ public class ConfirmOrder extends HttpServlet {
 
                     if (r > 0) {
                         System.out.println("Order Placed");
+                         PreparedStatement ps1 = conn.prepareStatement("Update user SET creditPoints=? WHERE userId=?");
+                         ps1.setInt(1, cp);
+                         ps1.setInt(2, userId);
+                         int r1 = 0;
+                         r1 = ps1.executeUpdate();
+                         if(r1 > 0){
+                             User user = (User) request.getSession().getAttribute("user");
+                             cp = cp + 25;
+                             user.setCreditPoints(cp);
                         request.setAttribute("userId", userId);
                         RequestDispatcher rd = request.getRequestDispatcher("MyOrders.jsp");
                         rd.forward(request, response);
+                         }
                     } else {
                         System.out.println("Order Failed");
                     }

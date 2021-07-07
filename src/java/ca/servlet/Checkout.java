@@ -33,13 +33,17 @@ public class Checkout extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
        String total = request.getParameter("Total");
        String type = request.getParameter("Type");
-       
-       System.out.println(total);
+        String cp = request.getParameter("CP");
+       System.out.println(cp);
         try (PrintWriter out = response.getWriter()) {
+           
            request.setAttribute("total", total);
             request.setAttribute("type", type);
+            request.setAttribute("cp", cp);
             RequestDispatcher rd = request.getRequestDispatcher("pay.jsp");
             rd.forward(request, response);
+        
+            
         }
     }
 

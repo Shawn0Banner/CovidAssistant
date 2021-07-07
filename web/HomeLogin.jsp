@@ -163,7 +163,7 @@
     </head>
     <body>
 
-        <nav class="navbar navbar-inverse" style="background-color: #2eb82e">
+        <nav class="navbar navbar-inverse" style="background-color: green">
             <div class="container-fluid" >
                 <div class="navbar-header">
                     <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
@@ -175,7 +175,7 @@
                 </div>
                 <div class="collapse navbar-collapse" id="myNavbar">
                     <ul class="nav navbar-nav">
-                        <li><a href="#" class="navbtn" style="color:white;margin-left: 825px">Home</a></li>
+                        <li><a href="AdminLogin.jsp" class="navbtn" style="color:white;margin-left: 825px">Admin</a></li>
                         <li><a href="#" class="navbtn" style="color:white">About</a></li>
                         <!-- <li><a href="#">Projects</a></li> -->
                         <li><a href="#" class="navbtn" style="color:white">Contact</a></li>

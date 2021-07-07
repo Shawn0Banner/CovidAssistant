@@ -58,6 +58,7 @@
             User user = (User) request.getSession().getAttribute("user");
             String total = (String) request.getAttribute("total");
             String type = (String) request.getAttribute("type");
+            String cp = (String) request.getAttribute("cp");
         System.out.println(total);%>
         
          <nav class="navbar navbar-expand-lg navbar-light fixed-top" style="background-color: green">
@@ -110,9 +111,11 @@
                                     <label for="pinCode">
                                         <h6> Total Amount </h6>
                                     </label> 
-                                    <input type="text" name="totalPrice" required class="form-control"  placeholder="Amount" value="<%=total%>" readonly="readonly"/> 
+                                    <input type="text" name="totalPrice" required class="form-control"  placeholder="Amount" value="<%=total%>" readonly="readonly"/>
+                                    
                                     <input type="hidden" name="type" required class="form-control"  placeholder="Amount" value="<%=type%>" readonly="readonly"/> 
-                                    <input type="hidden" name="userId" value="${user.getUserId()}" /></div>
+                                    <input type="hidden" name="userId" value="${user.getUserId()}" />
+                                <input type="hidden" name="cp" value="<%=cp%>" /></div>
                                 <!--<p> <button type="button" class="btn btn-primary "><i class="fas fa-mobile-alt mr-2"></i> Proceed</button> </p>-->
                                 <p class="text-muted"> Note: After filling up the address, choose your convenient payment method. </p>
 

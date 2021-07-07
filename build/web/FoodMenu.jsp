@@ -1,3 +1,4 @@
+<%@page import="ca.bean.User"%>
 <%@page import="java.sql.ResultSet"%>
 <%@page import="java.sql.PreparedStatement"%>
 <%@page import="ca.utilities.ConnectionProviderToDB"%>
@@ -12,7 +13,7 @@
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha1/css/bootstrap.min.css" integrity="sha384-r4NyP46KrjDleawBgD5tp8Y7UzmLA05oM1iAEQ17CSuDqnUK2+k9luXQOfXJCJ4I" crossorigin="anonymous">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" integrity="sha512-PgQMlq+nqFLV4ylk1gwUOgm6CtIIXkKwaIHp/PAIWHzig/lKZSEGKEysh0TCVbHJXCLN7WetD8TFecIky75ZfQ==" crossorigin="anonymous" />
         <link rel="stylesheet" type="text/css" href="css/style1.css">
-        <title>ThapaCart</title>
+        <title>Food Menu</title>
          <script type="text/javascript">
             window.history.forward();
             function noBack()
@@ -66,6 +67,9 @@
     </head>
      
     <body class="bg-light" onLoad="noBack();" onpageshow="if (event.persisted) noBack();" onUnload="">
+        <%
+            User user = (User) request.getSession().getAttribute("user");%>
+            
         <nav class="navbar navbar-expand-lg navbar-light fixed-top" style="background-color: green">
             <div class="container">
                 <a class="navbar-brand" href="#">CovidCare</a>
@@ -192,6 +196,7 @@
                                     <p>Rs.<span id="total_cart_amt" name="TotalAmt" value="">0.00</span></p>
                                     <input type="hidden" name="Total" id="Total" />
                                     <input type="hidden" name="Type" value="Food" />
+                                    <input type="hidden" name="CP" id="CP" />
                                 </div>
                           
                                     <button type="submit" class="btn btn-primary text-uppercase">Checkout</button>
@@ -203,20 +208,36 @@
                                 <div class="card">
                                     <div class="card-body">
                                         <a class="d-flex justify-content-between" data-toggle="collapse" href="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
-                                            Add a discount code (optional)
+                                            Use Credit points
                                             <span><i class="fas fa-chevron-down pt-1"></i></span>
                                         </a>
                                         <div class="collapse" id="collapseExample">
                                             <div class="mt-3">
-                                                <input type="text" name="" id="discount_code1" class="form-control font-weight-bold" placeholder="Enter the discount code">
-                                                <small id="error_trw" class="text-dark mt-3">code is thapa</small>
+                                                <input type="text" name="" id="credit_points1" class="form-control font-weight-bold" value="${user.getCreditPoints()}" placeholder="" readonly="readonly"/>
+                                                <small id="error_tr" class="text-dark mt-3"></small>
                                             </div>
-                                            <button class="btn btn-primary btn-sm mt-3" onclick="discount_code()">Apply</button>
+                                            <button id="cpbtn" class="btn btn-primary btn-sm mt-3" onclick="credit_points()">Apply</button>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-
+                            <div class="discount_code mt-3 shadow">
+                                <div class="card">
+                                    <div class="card-body">
+                                        <a class="d-flex justify-content-between" data-toggle="collapse" href="#collapse" aria-expanded="false" aria-controls="collapseExample">
+                                            Add a discount code (optional)
+                                            <span><i class="fas fa-chevron-down pt-1"></i></span>
+                                        </a>
+                                        <div class="collapse" id="collapse">
+                                            <div class="mt-3">
+                                                <input type="text" name="" id="discount_code1" class="form-control font-weight-bold" placeholder="Enter the discount code">
+                                                <small id="error_trw" class="text-dark mt-3">code is covid15</small>
+                                            </div>
+                                            <button id="disbtn" class="btn btn-primary btn-sm mt-3" onclick="discount_code()">Apply</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
 
                             <!-- discount code ends -->
 <!--                            <div class="mt-3 shadow p-3 bg-white">
@@ -282,12 +303,31 @@
                                                 const  discount_code = () => {
                                                     let totalamtcurr = parseInt(total_cart_amt.innerHTML);
                                                     let error_trw = document.getElementById('error_trw');
-                                                    if (discountCode.value === 'thapa') {
+                                                    if (discountCode.value === 'covid15') {
+                                                        document.getElementById('disbtn').disabled = true;
                                                         let newtotalamt = totalamtcurr - 15;
                                                         total_cart_amt.innerHTML = newtotalamt;
+                                                        Total.value = total_cart_amt.innerHTML;
                                                         error_trw.innerHTML = "Hurray! code is valid";
                                                     } else {
-                                                        error_trw.innerHTML = "Try Again! Valid code is thapa";
+                                                        error_trw.innerHTML = "Try Again! Valid code is covid15";
+                                                    }
+                                                }
+                                                const  credit_points = () => {
+                                                    let totalamtcurr = parseInt(total_cart_amt.innerHTML);
+                                                    let creditpoints = parseInt(credit_points1.value);
+                                                    let error_tr = document.getElementById('error_tr');
+                                                    if (creditpoints >= 50 && totalamtcurr > 50) {
+                                                        document.getElementById('cpbtn').disabled = true;
+                                                        let newtotalamt = totalamtcurr - 50;
+                                                        let newcreditpoint = creditpoints - 50;
+                                                        total_cart_amt.innerHTML = newtotalamt;
+                                                        credit_points1.value = newcreditpoint;
+                                                        Total.value = total_cart_amt.innerHTML;
+                                                        CP.value = credit_points1.value;
+                                                        error_tr.innerHTML = "Hurray! credit points used";
+                                                    } else {
+                                                        error_tr.innerHTML = "Insufficient credit points";
                                                     }
                                                 }
         </script>

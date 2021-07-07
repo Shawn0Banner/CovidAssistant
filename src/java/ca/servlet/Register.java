@@ -58,7 +58,7 @@ public class Register extends HttpServlet {
 
             if (rs.next()) {
                 System.out.println("Email Address Already Present");
-                out.print("<script>alert('Email Address Already Present'); window.location.href='HomeLogin.jsp';</script>");
+                out.print("<script>alert('Phone number Already Present'); window.location.href='HomeLogin.jsp';</script>");
             } else {
 
                 PreparedStatement ps = conn.prepareStatement("insert into user(userName, phoneNo, address, password, creditPoints) values (?,?,?,?,?)");
@@ -66,20 +66,16 @@ public class Register extends HttpServlet {
                 ps.setString(2, newUser.getPhoneNo());
                 ps.setString(3, newUser.getAddress());
                 ps.setString(4, newUser.getPassword());
-                ps.setInt(5, 0);
+                ps.setInt(5, 100);
 
                 int r = ps.executeUpdate();
 
                 if (r > 0) {
                     System.out.println("New user created SUCCESSFULLY");
 
-                    HttpSession session = request.getSession();
-                    User user = new User();
-                    user.setUserId(newUser.getUserId());
-                    user.setUserName(newUser.getUserName());
-                    session.setAttribute("user", user);
-                    RequestDispatcher rd = request.getRequestDispatcher("UserHome.jsp");
-                    rd.forward(request, response);
+                   out.print("<script>alert('Registration Successful'); window.location.href='HomeLogin.jsp';</script>");
+                    RequestDispatcher rd = request.getRequestDispatcher("HomeLogin.jsp");
+                    rd.include(request, response);
                 } else {
                     System.out.println("New user creation FAILED");
                 }

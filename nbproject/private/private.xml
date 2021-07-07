@@ -5,13 +5,13 @@
         <group>
             <file>file:/C:/Users/hp/Documents/NetBeansProjects/CovidAssistant/web/FoodMenu.jsp</file>
             <file>file:/C:/Users/hp/Documents/NetBeansProjects/CovidAssistant/src/java/ca/servlet/ConfirmOrder.java</file>
-            <file>file:/C:/Users/hp/Documents/NetBeansProjects/CovidAssistant/web/UserHome.jsp</file>
+            <file>file:/C:/Users/hp/Documents/NetBeansProjects/CovidAssistant/src/java/ca/servlet/Register.java</file>
+            <file>file:/C:/Users/hp/Documents/NetBeansProjects/CovidAssistant/src/java/ca/servlet/Login.java</file>
             <file>file:/C:/Users/hp/Documents/NetBeansProjects/CovidAssistant/src/java/ca/servlet/Checkout.java</file>
             <file>file:/C:/Users/hp/Documents/NetBeansProjects/CovidAssistant/web/pay.jsp</file>
             <file>file:/C:/Users/hp/Documents/NetBeansProjects/CovidAssistant/src/java/ca/bean/MedicalSupplies.java</file>
             <file>file:/C:/Users/hp/Documents/NetBeansProjects/CovidAssistant/web/MedicalSupplies.jsp</file>
             <file>file:/C:/Users/hp/Documents/NetBeansProjects/CovidAssistant/web/MyOrders.jsp</file>
-            <file>file:/C:/Users/hp/Documents/NetBeansProjects/CovidAssistant/src/java/ca/servlet/Cancel.java</file>
             <file>file:/C:/Users/hp/Documents/NetBeansProjects/CovidAssistant/web/HomeLogin.jsp</file>
         </group>
     </open-files>

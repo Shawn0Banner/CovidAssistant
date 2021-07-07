@@ -1,3 +1,4 @@
+<%@page import="ca.bean.User"%>
 <%@page import="java.sql.ResultSet"%>
 <%@page import="java.sql.PreparedStatement"%>
 <%@page import="ca.utilities.ConnectionProviderToDB"%>
@@ -12,8 +13,8 @@
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha1/css/bootstrap.min.css" integrity="sha384-r4NyP46KrjDleawBgD5tp8Y7UzmLA05oM1iAEQ17CSuDqnUK2+k9luXQOfXJCJ4I" crossorigin="anonymous">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" integrity="sha512-PgQMlq+nqFLV4ylk1gwUOgm6CtIIXkKwaIHp/PAIWHzig/lKZSEGKEysh0TCVbHJXCLN7WetD8TFecIky75ZfQ==" crossorigin="anonymous" />
         <link rel="stylesheet" type="text/css" href="css/style1.css">
-        <title>ThapaCart</title>
-         <script type="text/javascript">
+        <title>Medical Supplies</title>
+        <script type="text/javascript">
             window.history.forward();
             function noBack()
             {
@@ -66,6 +67,8 @@
     </head>
 
     <body class="bg-light" onLoad="noBack();" onpageshow="if (event.persisted) noBack();" onUnload="">
+        <%
+             User user = (User) request.getSession().getAttribute("user");%>
         <!-- Navigation -->
         <nav class="navbar navbar-expand-lg navbar-light fixed-top" style="background-color: green">
             <div class="container">
@@ -190,29 +193,49 @@
                                 </div>
                                 <hr />
                                 <form method="Post" action="Checkout">
-                                <div class="total-amt d-flex justify-content-between font-weight-bold">
-                                    <p>The total amount (GST included)</p>
-                                    <p>Rs.<span id="total_cart_amt" name="TotalAmt" value="">0.00</span></p>
-                                    <input type="hidden" name="Total" id="Total" />
-                                    <input type="hidden" name="Type" value="MedicalSupplies" />
-                                </div>
-                                <button class="btn btn-primary text-uppercase" type="submit">Checkout</button>
+                                    <div class="total-amt d-flex justify-content-between font-weight-bold">
+                                        <p>The total amount (GST included)</p>
+                                        <p>Rs.<span id="total_cart_amt" name="TotalAmt" value="">0.00</span></p>
+                                        <input type="hidden" name="Total" id="Total" />
+                                        <input type="hidden" name="Type" value="MedicalSupplies" />
+                                        <input type="hidden" name="CP" id="CP" />
+                                    </div>
+                                    <button class="btn btn-primary text-uppercase" type="submit">Checkout</button>
                                 </form>
                             </div>
+
                             <!-- discount code part -->
                             <div class="discount_code mt-3 shadow">
                                 <div class="card">
                                     <div class="card-body">
                                         <a class="d-flex justify-content-between" data-toggle="collapse" href="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
-                                            Add a promo code (optional)
+                                            Use Credit points
                                             <span><i class="fas fa-chevron-down pt-1"></i></span>
                                         </a>
                                         <div class="collapse" id="collapseExample">
                                             <div class="mt-3">
+                                                <input type="text" name="" id="credit_points1" class="form-control font-weight-bold" value="${user.getCreditPoints()}" placeholder="" readonly="readonly"/>
+                                                <small id="error_tr" class="text-dark mt-3">Maximum 50 per order</small>
+                                            </div>
+                                            <button id="cpbtn" class="btn btn-primary btn-sm mt-3" onclick="credit_points()">Apply</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- discount code part -->
+                            <div class="discount_code mt-3 shadow">
+                                <div class="card">
+                                    <div class="card-body">
+                                        <a class="d-flex justify-content-between" data-toggle="collapse" href="#collapse" aria-expanded="false" aria-controls="collapseExample">
+                                            Add a promo code (optional)
+                                            <span><i class="fas fa-chevron-down pt-1"></i></span>
+                                        </a>
+                                        <div class="collapse" id="collapse">
+                                            <div class="mt-3">
                                                 <input type="text" name="" id="discount_code1" class="form-control font-weight-bold" placeholder="Enter the discount code">
                                                 <small id="error_trw" class="text-dark mt-3">code is covid15</small>
                                             </div>
-                                            <button class="btn btn-primary btn-sm mt-3" onclick="discount_code()">Apply</button>
+                                            <button id="disbtn" class="btn btn-primary btn-sm mt-3" onclick="discount_code()">Apply</button>
                                         </div>
                                     </div>
                                 </div>
@@ -238,59 +261,79 @@
 
         <script type="text/javascript">
 
-                                                var product_total_amt = document.getElementById('product_total_amt');
-                                                var shipping_charge = document.getElementById('shipping_charge');
-                                                var total_cart_amt = document.getElementById('total_cart_amt');
-                                                var discountCode = document.getElementById('discount_code1');
-                                                const decreaseNumber = (incdec, itemprice, iprice) => {
-                                                    var itemval = document.getElementById(incdec);
-                                                    var itemprice = document.getElementById(itemprice);
-                                                    var price = document.getElementById(iprice);
+            var product_total_amt = document.getElementById('product_total_amt');
+            var shipping_charge = document.getElementById('shipping_charge');
+            var total_cart_amt = document.getElementById('total_cart_amt');
+            var discountCode = document.getElementById('discount_code1');
+            const decreaseNumber = (incdec, itemprice, iprice) => {
+                var itemval = document.getElementById(incdec);
+                var itemprice = document.getElementById(itemprice);
+                var price = document.getElementById(iprice);
 //                                                    console.log(price.value);
 
-                                                    if (itemval.value <= 0) {
-                                                        itemval.value = 0;
-                                                        alert('Negative quantity not allowed');
-                                                    } else {
-                                                        itemval.value = parseInt(itemval.value) - 1;
-                                                        itemval.style.background = '#fff';
-                                                        itemval.style.color = '#000';
-                                                        itemprice.innerHTML = parseInt(itemprice.innerHTML) - parseInt(price.innerHTML);
-                                                        product_total_amt.innerHTML = parseInt(product_total_amt.innerHTML) - parseInt(price.innerHTML);
-                                                        total_cart_amt.innerHTML = parseInt(product_total_amt.innerHTML) + parseInt(shipping_charge.innerHTML);
-                                                        Total.value = total_cart_amt.innerHTML;
-                                                    }
-                                                }
-                                                const increaseNumber = (incdec, itemprice, iprice) => {
-                                                    var itemval = document.getElementById(incdec);
-                                                    var itemprice = document.getElementById(itemprice);
-                                                    var price = document.getElementById(iprice);
-                                                    console.log(parseInt(price.innerHTML));
-                                                    if (itemval.value >= 5) {
-                                                        itemval.value = 5;
-                                                        alert('max 5 allowed');
-                                                        itemval.style.background = 'red';
-                                                        itemval.style.color = '#fff';
-                                                    } else {
-                                                        itemval.value = parseInt(itemval.value) + 1;
-                                                        itemprice.innerHTML = parseInt(itemprice.innerHTML) + parseInt(price.innerHTML);
-                                                        product_total_amt.innerHTML = parseInt(product_total_amt.innerHTML) + parseInt(price.innerHTML);
-                                                        total_cart_amt.innerHTML = parseInt(product_total_amt.innerHTML) + parseInt(shipping_charge.innerHTML);
-                                                        Total.value = total_cart_amt.innerHTML;
-                                                    }
-                                                }
+                if (itemval.value <= 0) {
+                    itemval.value = 0;
+                    alert('Negative quantity not allowed');
+                } else {
+                    itemval.value = parseInt(itemval.value) - 1;
+                    itemval.style.background = '#fff';
+                    itemval.style.color = '#000';
+                    itemprice.innerHTML = parseInt(itemprice.innerHTML) - parseInt(price.innerHTML);
+                    product_total_amt.innerHTML = parseInt(product_total_amt.innerHTML) - parseInt(price.innerHTML);
+                    total_cart_amt.innerHTML = parseInt(product_total_amt.innerHTML) + parseInt(shipping_charge.innerHTML);
+                    Total.value = total_cart_amt.innerHTML;
+                }
+            }
+            const increaseNumber = (incdec, itemprice, iprice) => {
+                var itemval = document.getElementById(incdec);
+                var itemprice = document.getElementById(itemprice);
+                var price = document.getElementById(iprice);
+                console.log(parseInt(price.innerHTML));
+                if (itemval.value >= 5) {
+                    itemval.value = 5;
+                    alert('max 5 allowed');
+                    itemval.style.background = 'red';
+                    itemval.style.color = '#fff';
+                } else {
+                    itemval.value = parseInt(itemval.value) + 1;
+                    itemprice.innerHTML = parseInt(itemprice.innerHTML) + parseInt(price.innerHTML);
+                    product_total_amt.innerHTML = parseInt(product_total_amt.innerHTML) + parseInt(price.innerHTML);
+                    total_cart_amt.innerHTML = parseInt(product_total_amt.innerHTML) + parseInt(shipping_charge.innerHTML);
+                    Total.value = total_cart_amt.innerHTML;
+                }
+            }
 
-                                                const  discount_code = () => {
-                                                    let totalamtcurr = parseInt(total_cart_amt.innerHTML);
-                                                    let error_trw = document.getElementById('error_trw');
-                                                    if (discountCode.value === 'covid15') {
-                                                        let newtotalamt = totalamtcurr - (totalamtcurr*15/100);
-                                                        total_cart_amt.innerHTML = newtotalamt;
-                                                        error_trw.innerHTML = "Promocode applied!!";
-                                                    } else {
-                                                        error_trw.innerHTML = "Try Again! That is not a valid code.";
-                                                    }
-                                                }
+            const  discount_code = () => {
+                let totalamtcurr = parseInt(total_cart_amt.innerHTML);
+                let error_trw = document.getElementById('error_trw');
+                if (discountCode.value === 'covid15') {
+                    document.getElementById('disbtn').disabled = true;
+                    let newtotalamt = totalamtcurr - (totalamtcurr * 15 / 100);
+                    total_cart_amt.innerHTML = newtotalamt;
+                    Total.value = total_cart_amt.innerHTML;
+                    error_trw.innerHTML = "Promocode applied!!";
+                } else {
+                    error_trw.innerHTML = "Try Again! That is not a valid code.";
+                }
+            }
+            const  credit_points = () => {
+                let totalamtcurr = parseInt(total_cart_amt.innerHTML);
+                let creditpoints = parseInt(credit_points1.value);
+                let error_tr = document.getElementById('error_tr');
+                if (creditpoints >= 50 && totalamtcurr > 50) {
+                    document.getElementById('cpbtn').disabled = true;
+                    let newtotalamt = totalamtcurr - 50;
+                    let newcreditpoint = creditpoints - 50;
+                    total_cart_amt.innerHTML = newtotalamt;
+                    credit_points1.value = newcreditpoint;
+                    Total.value = total_cart_amt.innerHTML;
+                    CP.value = credit_points1.value;
+                    error_tr.innerHTML = "Hurray! credit points used";
+                    
+                } else {
+                    error_tr.innerHTML = "Insufficient credit points";
+                }
+            }
         </script>
 
     </body>
