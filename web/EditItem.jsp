@@ -59,7 +59,7 @@
                 right:0;left:0;
                 margin:auto;
                 height:400px;
-                background-color: #0000b3;
+                background: -webkit-linear-gradient(top, #6699ff, #b3ccff);
             }
             .white-panel{
                 background-color: rgba(255,255, 255, 1);
@@ -77,11 +77,11 @@
                 display:none;
             }
             .login-reg-panel{
-                color:#B8B8B8;
+                color:white;
             }
             .login-reg-panel #label-login, 
             .login-reg-panel #label-register{
-                border:1px solid #9E9E9E;
+                border:1px solid white;
                 padding:5px 5px;
                 width:150px;
                 display:block;
@@ -199,12 +199,12 @@
             }
 
             .navbar .navbar-nav .nav-link {
-                color: #cc0000;
+                color: #008080;
                 font-size: 1.1em;
                 position: relative;
             }
             .navbar .navbar-nav .nav-link:hover {
-                color: #cc0000;
+                color: white;
             }
             .navbar .navbar-nav .nav-link::after {
                 position: absolute;
@@ -212,7 +212,7 @@
                 left: 0;
                 right: 0;
                 margin: auto;
-                background-color: #cc0000;
+                background-color: white;
                 color: transparent;
                 width: 0%;
                 content: '.';
@@ -287,7 +287,7 @@
 
     <body>
 
-        <nav class="navbar navbar-expand-lg navbar-dark fixed-top" style="background-color: green" id="mainNav">
+        <nav class="navbar navbar-expand-lg navbar-dark fixed-top" style="background-color: #008080" id="mainNav">
             <div class="container">
                 <a class="navbar-brand" href="#">
                  Covidcare
@@ -302,7 +302,7 @@
                             <a class="nav-link js-scroll-trigger" href="AdminHome.jsp" style ="color: white">Home</a>
                         </li>
                         <li class="nav-item active">
-                            <a class="nav-link" href="Remove.jsp">Remove</a>
+                            <a class="nav-link" href="RemoveItem.jsp">Remove</a>
                         </li>
                         <li class="nav-item active">
                             <a class="nav-link" href="Logout">Logout<span class="sr-only">(current)</span></a>
@@ -340,7 +340,7 @@
 
                         <br>   
                         
-                        <input type="submit" value="Submit" class="btn btn-dark" style="float:right;padding-right: 20px;padding-left: 20px">
+                        <input type="submit" value="Submit" class="btn btn-dark" style="float:right;padding-right: 20px;padding-left: 20px;background-color: #008080">
                     </form>
                 </div>
                 <div class="register-show">
@@ -354,7 +354,7 @@
                          <input type="text" name="mdate" class="form-control" placeholder="Enter Expiration Date" value="" />
                         <br>
                        
-                        <input type="submit" value="Submit" class="btn btn-dark" style="float:right;padding-right: 20px;padding-left: 20px">
+                        <input type="submit" value="Submit" class="btn btn-dark" style="float:right;padding-right: 20px;padding-left: 20px;background-color: #008080">
 
                     </form>
 
@@ -392,7 +392,7 @@
 
 
         <!-- Footer -->
-        <footer class="py-3  fixed-bottom" style="background-color: green">
+        <footer class="py-3  fixed-bottom" style="background-color: #008080">
             <div class="container">
                 <p class="m-0 text-center text-white">Copyright &copy; Team@CovidCare</p>
             </div>

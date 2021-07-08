@@ -5,11 +5,15 @@
  */
 package ca.servlet;
 
+import ca.bean.User;
 import ca.utilities.ConnectionProviderToDB;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.PrintWriter;
 import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -34,11 +38,34 @@ public class Cancel extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
 
+        int orderId = Integer.parseInt(request.getParameter("orderId"));
+        Connection con = null;
 
+        InputStream inputFile = getServletContext().getResourceAsStream("/WEB-INF/db_params.properties");
         try (PrintWriter out = response.getWriter()) {
-           
-           
+            con = ConnectionProviderToDB.getConnectionObject().getConnection(inputFile);
+            PreparedStatement ps = con.prepareStatement("UPDATE covid_assistant.order SET status=? WHERE orderId=?");
+            ps.setString(1, "Cancelled");
+            ps.setInt(2, orderId);
+            int r1 = 0;
+            r1 = ps.executeUpdate();
+            if (r1 > 0) {
+                System.out.println("Order Cancelled");
+                out.print("<script>alert('Order Cancelled!!'); window.location.href='MyOrders.jsp';</script>");
+                RequestDispatcher rd = request.getRequestDispatcher("MyOrders.jsp");
+                rd.include(request, response);
+
+            }
+        } catch (Exception e) {
+            System.out.println(e);
+        } finally {
+            try {
+                con.close();
+            } catch (SQLException ex) {
+                System.out.println(ex);
+            }
         }
+
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

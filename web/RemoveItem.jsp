@@ -1,13 +1,16 @@
 <%-- 
-    Document   : Remove
-    Created on : 7 Jul, 2021, 8:32:37 PM
-    Author     : USER
+    Document   : RemoveItem
+    Created on : 8 Jul, 2021, 11:14:29 AM
+    Author     : hp
 --%>
 
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@page import="java.sql.ResultSet"%>
 <%@page import="java.sql.PreparedStatement"%>
 <%@page import="ca.utilities.ConnectionProviderToDB"%>
 <%@page import="java.sql.Connection"%>
 <%@page import="java.io.InputStream"%>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -37,7 +40,7 @@
 
                 // Loop through all table rows, and hide those who don't match the search query
                 for (i = 0; i < tr.length; i++) {
-                    td = tr[i].getElementsByTagName("td")[0];
+                    td = tr[i].getElementsByTagName("td")[1];
                     if (td) {
                         txtValue = td.textContent || td.innerText;
                         if (txtValue.toUpperCase().indexOf(filter) > -1) {
@@ -321,7 +324,7 @@ a.btn {
 <body onLoad="noBack();" onpageshow="if (event.persisted) noBack();" onUnload="">
 <%
        %>
-<nav class="navbar navbar-expand-lg navbar-light fixed-top" style="background-color: green">
+<nav class="navbar navbar-expand-lg navbar-light fixed-top" style="background-color: #008080">
   <div class="container">
     <a class="navbar-brand" href="#">CovidCare</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -333,7 +336,7 @@ a.btn {
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav ml-auto">
         <li class="nav-item active">
-          <a class="nav-link" href="UserHome.jsp"><i class="fa fa-home" style="font-size:20px"></i></a>
+          <a class="nav-link" href="AdminHome.jsp"><i class="fa fa-home" style="font-size:20px"></i></a>
         </li>
         <li class="nav-item">
           <a class="nav-link" href="Logout"><i class="fa fa-power-off" style="font-size:20px"></i></a>
@@ -348,7 +351,7 @@ a.btn {
 </nav>
 <div class="table-responsive" id="sailorTableArea">
     <br><br><br>
-            <input type="text" id="myInput" onkeyup="myFunction()" placeholder="Search by Order Id.."/>
+            <input type="text" id="myInput" onkeyup="myFunction()" placeholder="Search by Item name.."/>
             <br>
             <table  class="table table-striped table-bordered" width="100%">
                 <thead>
@@ -357,9 +360,9 @@ a.btn {
                         <th scope="col">Item Id</th>
                         <th scope="col">Item Name</th>
                         <th scope="col">Price</th>
-                        <th scope="col">Expiration Date</th>
+                        <th scope="col">Expiry Date</th>
                         <th scope="col">Status</th>
-                       
+                        <th scope="col">Update Status</th>
                         
                        
                        
@@ -374,19 +377,50 @@ a.btn {
 
                         con = ConnectionProviderToDB.getConnectionObject().getConnection(inputFile);
 
-                        PreparedStatement ps1 = con.prepareStatement("SELECT foodId, foodName, price, Status FROM covid_assistant.foodmenu");
-                         ps1.setInt(1, user.getUserId());
+                        PreparedStatement ps1 = con.prepareStatement("SELECT foodId, foodName, price, status FROM covid_assistant.foodmenu");
+                         
                         ResultSet rs = ps1.executeQuery();
 
                         while (rs.next()) {
                     %>
                     <tr>
-                        <td><%= rs.getString("orderId")%></td>
-                        <td><%= rs.getString("orderType")%></td>
-                        <td><%= rs.getString("totalPrice")%></td>
-                        <td><%= rs.getString("orderDate")%></td>
+                        <td><%= rs.getInt("foodId")%></td>
+                        <td><%= rs.getString("foodName")%></td>
+                        <td><%= rs.getString("price")%></td>
+                        <td>N/A</td>
                         <td><%= rs.getString("status")%></td>
-                       
+                       <td><button type="button" class="btn btn-primary" onclick="window.location.href = 'ItemStatus?itemId=<%= rs.getInt("foodId")%>&category=food'" style="background-color: #008080">Update</button>
+                  </tr>
+                    <%}
+
+                        //System.out.println("</table>");  
+                        //System.out.println("</html></body>");  
+                        con.close();
+                    %>
+
+                  
+              
+        
+                    <%                 inputFile = getServletContext().getResourceAsStream("/WEB-INF/db_params.properties");
+                        System.out.println(inputFile);
+                        
+                         con = null;
+
+                        con = ConnectionProviderToDB.getConnectionObject().getConnection(inputFile);
+
+                        PreparedStatement ps2 = con.prepareStatement("SELECT medId, medName, price, expirationDate, status FROM covid_assistant.medicalsupplies");
+                         
+                        ResultSet rs2 = ps2.executeQuery();
+
+                        while (rs2.next()) {
+                    %>
+                    <tr>
+                        <td><%= rs2.getInt("medId")%></td>
+                        <td><%= rs2.getString("medName")%></td>
+                        <td><%= rs2.getString("price")%></td>
+                        <td><%= rs2.getString("expirationDate")%></td>
+                        <td><%= rs2.getString("status")%></td>
+                       <td><button type="button" class="btn btn-primary" onclick="window.location.href = 'ItemStatus?itemId=<%= rs2.getInt("medId")%>&category=medical'" style="background-color: #008080">Update</button>
                   </tr>
                     <%}
 
@@ -411,4 +445,3 @@ a.btn {
 
     </body>
 </html>
-

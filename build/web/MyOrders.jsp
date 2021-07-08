@@ -326,7 +326,7 @@ a.btn {
             User user = (User) request.getSession().getAttribute("user");
             
         %>
-<nav class="navbar navbar-expand-lg navbar-light fixed-top" style="background-color: green">
+<nav class="navbar navbar-expand-lg navbar-light fixed-top" style="background-color: #008080">
   <div class="container">
     <a class="navbar-brand" href="#">CovidCare</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -364,7 +364,7 @@ a.btn {
                         <th scope="col">Amount</th>
                         <th scope="col">Date</th>
                         <th scope="col">Status</th>
-                       
+                       <th scope="col">Cancel Order</th>
                         
                        
                        
@@ -379,19 +379,56 @@ a.btn {
 
                         con = ConnectionProviderToDB.getConnectionObject().getConnection(inputFile);
 
-                        PreparedStatement ps1 = con.prepareStatement("SELECT orderId, orderType, totalPrice, orderDate, status FROM covid_assistant.order WHERE userId=? order by orderId desc");
+                        PreparedStatement ps1 = con.prepareStatement("SELECT orderId, orderType, totalPrice, orderDate, status FROM covid_assistant.order WHERE userId=? AND status='Order Placed' OR status='Out For Delivery' order by orderId desc");
                          ps1.setInt(1, user.getUserId());
                         ResultSet rs = ps1.executeQuery();
 
                         while (rs.next()) {
                     %>
                     <tr>
-                        <td><%= rs.getString("orderId")%></td>
+                        <td><%= rs.getInt("orderId")%></td>
                         <td><%= rs.getString("orderType")%></td>
                         <td><%= rs.getString("totalPrice")%></td>
                         <td><%= rs.getString("orderDate")%></td>
                         <td><%= rs.getString("status")%></td>
-                       
+                        <td><button type="button" class="btn btn-danger" onclick="myFunc();">Cancel</button>
+                  </tr>
+                   <script>
+                    function myFunc() {
+                        var con = confirm("Press OK to confirm!");
+                        if (con == true) {
+                            window.location.href = 'Cancel?orderId=<%= rs.getInt("orderId")%>';
+                        } else {
+                            window.location.href = 'MyOrders.jsp';
+                        }
+                    }
+                </script>
+                    <%}
+
+                        //System.out.println("</table>");  
+                        //System.out.println("</html></body>");  
+                        con.close();
+                    %>
+<%                inputFile = getServletContext().getResourceAsStream("/WEB-INF/db_params.properties");
+                        System.out.println(inputFile);
+                        
+                        con = null;
+
+                        con = ConnectionProviderToDB.getConnectionObject().getConnection(inputFile);
+
+                        PreparedStatement ps2 = con.prepareStatement("SELECT orderId, orderType, totalPrice, orderDate, status FROM covid_assistant.order WHERE userId=? AND status='Cancelled' OR status='Delivered' order by orderId desc");
+                         ps2.setInt(1, user.getUserId());
+                        ResultSet rs2 = ps2.executeQuery();
+
+                        while (rs2.next()) {
+                    %>
+                    <tr>
+                        <td><%= rs2.getString("orderId")%></td>
+                        <td><%= rs2.getString("orderType")%></td>
+                        <td><%= rs2.getString("totalPrice")%></td>
+                        <td><%= rs2.getString("orderDate")%></td>
+                        <td><%= rs2.getString("status")%></td>
+                        <td>
                   </tr>
                     <%}
 

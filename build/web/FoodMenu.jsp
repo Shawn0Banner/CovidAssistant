@@ -63,14 +63,22 @@
             .navbar-light .navbar-nav .nav-link:focus, .navbar-light .navbar-nav .nav-link:hover {
                 color: #fff;
             }
+            .page-link{
+                background-color:white;
+                color:#008080;
+            }
+            .page-link:hover{
+                background-color:#008080;
+                color:white;
+            }
         </style>
     </head>
      
-    <body class="bg-light" onLoad="noBack();" onpageshow="if (event.persisted) noBack();" onUnload="">
+    <body class="bg-light" onLoad="noBack();" onpageshow="if (event.persisted) noBack();" onUnload="" style="background: -webkit-linear-gradient(bottom, #6699ff, #b3ccff);font-family: 'Roboto', sans-serif;">
         <%
             User user = (User) request.getSession().getAttribute("user");%>
             
-        <nav class="navbar navbar-expand-lg navbar-light fixed-top" style="background-color: green">
+        <nav class="navbar navbar-expand-lg navbar-light fixed-top" style="background-color: #008080">
             <div class="container">
                 <a class="navbar-brand" href="#">CovidCare</a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -146,7 +154,7 @@
                                                     <li class="page-item"><input type="text" name="" class="page-link" value="0" id="<%= rs.getInt("foodId")%>" >
                                                     </li>
                                                     <li class="page-item">
-                                                        <button class="page-link" onclick="increaseNumber('<%= rs.getInt("foodId")%>', '<%= rs.getString("foodName")%>', 'p<%= rs.getInt("foodId")%>')" > <i class="fas fa-plus"></i></button>
+                                                        <button class="page-link" onclick="increaseNumber('<%= rs.getInt("foodId")%>', '<%= rs.getString("foodName")%>', 'p<%= rs.getInt("foodId")%>')"><i class="fas fa-plus"></i></button>
                                                     </li>
                                                 </ul>
                                             </div>
@@ -199,7 +207,7 @@
                                     <input type="hidden" name="CP" id="CP" />
                                 </div>
                           
-                                    <button type="submit" class="btn btn-primary text-uppercase">Checkout</button>
+                                    <button type="submit" class="btn text-uppercase" style="background-color:#008080;color:white;">Checkout</button>
                                 </form>
                             </div>
                            
@@ -216,7 +224,7 @@
                                                 <input type="text" name="" id="credit_points1" class="form-control font-weight-bold" value="${user.getCreditPoints()}" placeholder="" readonly="readonly"/>
                                                 <small id="error_tr" class="text-dark mt-3"></small>
                                             </div>
-                                            <button id="cpbtn" class="btn btn-primary btn-sm mt-3" onclick="credit_points()">Apply</button>
+                                            <button id="cpbtn" class="btn btn-primary btn-sm mt-3" onclick="credit_points()" style="background-color:#008080;color:white">Apply</button>
                                         </div>
                                     </div>
                                 </div>
@@ -233,7 +241,7 @@
                                                 <input type="text" name="" id="discount_code1" class="form-control font-weight-bold" placeholder="Enter the discount code">
                                                 <small id="error_trw" class="text-dark mt-3">code is covid15</small>
                                             </div>
-                                            <button id="disbtn" class="btn btn-primary btn-sm mt-3" onclick="discount_code()">Apply</button>
+                                            <button id="disbtn" class="btn btn-primary btn-sm mt-3" onclick="discount_code()" style="background-color:#008080;color:white">Apply</button>
                                         </div>
                                     </div>
                                 </div>

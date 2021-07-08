@@ -127,7 +127,8 @@ h1{
 	height: 100vh;
 	padding: 50px;
 	position: relative;
-	padding-top: 8%;
+	padding-top: 1%;
+        
 }
 
 
@@ -139,7 +140,7 @@ h1{
 	left:0;
 	right:0;
 	z-index: -1;
-	background: linear-gradient(160deg, #0080ff 55% , #fff 0%);
+	
 }
 
 .card{
@@ -154,7 +155,7 @@ h1{
 .card-body{
    /* height:400px;
     width:300px;*/
-    background-color: #ffe6ff;
+    background-color: #008080;
 }
 
 .card-footer{
@@ -163,12 +164,12 @@ h1{
 }
 
 .card-footer a{
- border : 2px solid var(--red);
+ border : 2px solid #008080;
  border-radius: 100px;
  margin: 0 5px;
  padding: 10px 25px;
  outline: none;
- color: red;
+ color: #008080;
  font-size: 1rem;
  font-weight:400 ;
  line-height: 1.4;
@@ -179,7 +180,7 @@ h1{
 
 .card:hover .card-footer a{
  color: #fff;
- background-color: var(--red);
+ background-color: #008080;
  text-decoration: none;
  box-shadow: oo 20px 0 rgba(0,0,0,0.3);
 }
@@ -190,7 +191,7 @@ h1{
 }
 
 .card:hover .card-header{
-	color: var(--red);
+	color: #008080;
 }
 
 .covid{
@@ -260,16 +261,16 @@ width: 80%;
 
     </head>
 
-    <body id="page-top" 
+    <body id="page-top" style="background: -webkit-linear-gradient(bottom, #6699ff, #b3ccff);font-family: 'Times New Roman', Times, serif;" >
           
-          >
+          
 
         <%
             User user = (User) request.getSession().getAttribute("user");
         %>
 
         <!-- Navigation -->
-     <nav class="navbar navbar-expand-lg navbar-light fixed-top" style="background-color: green">
+     <nav class="navbar navbar-expand-lg navbar-light fixed-top" style="background-color: #008080">
   <div class="container">
     <a class="navbar-brand" href="#">CovidCare</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -300,42 +301,9 @@ width: 80%;
             <h1 class="text-center text">Welcome <c:out value="${user.getUserName()}"></c:out></h1>
 
 	</div>-->
-<br><br>
-	<section class="main" >
-		<div class="container">
-			<div class="row">
-				
-				<div class="col-lg-4 offset-lg-2 col-12">
-					<div class="card text-center">
-						<div class="card-header">Stay Healthy</div>
-						<div class="card-body"> <img src="https://source.unsplash.com/300x350/?restaurent,salad" alt="Image" style=""></div>
-						<div class="card-footer"><a href="FoodMenu.jsp">Food Menu</a></div>
-					</div>
-				</div>
+<br><br><br>
 
-				<div class="col-lg-4 col-12 card-second">
-					<div class="card text-center">
-						<div class="card-header">Stay Strong</div>
-						<div class="card-body">
-							 <img src="https://source.unsplash.com/300x350/?pharmacy" alt="Image">
-						</div>
-						<div class="card-footer"><a href="MedicalSupplies.jsp"> Medicine</a></div>
-					</div>
-				</div>
-
-<!--				<div class="col-lg-4 col-12">
-					<div class="card text-center">
-						<div class="card-header">Stay Safe</div>
-						<div class="card-body"> <img src="https://source.unsplash.com/300x350/?ambulance" alt="Image" style=""></div>
-						<div class="card-footer"><a href="#">Ambulance</a></div>
-					</div>
-				</div>-->
-
-
-				</div>
-	</section>
-
-	<section class>
+<section class>
 			<div class="container covid">
 					<h2 class="text-center font-weight-bold" style="margin-top: 10px">COVID-19 CASES IN   <span id="country"></span>   <img style="height: 30px; width: 20px" src="" id="flag"></h2>
 					<div class="row">
@@ -375,6 +343,41 @@ width: 80%;
  				</div>
               	</div>
 	</section>
+	<section class="main" >
+		<div class="container">
+			<div class="row">
+				
+				<div class="col-lg-4 offset-lg-2 col-12">
+					<div class="card text-center">
+						<div class="card-header">Stay Healthy</div>
+						<div class="card-body"> <img src="https://source.unsplash.com/300x350/?restaurent,salad" alt="Image" style=""></div>
+						<div class="card-footer"><a href="FoodMenu.jsp">Food Menu</a></div>
+					</div>
+				</div>
+
+				<div class="col-lg-4 col-12 card-second">
+					<div class="card text-center">
+						<div class="card-header">Stay Strong</div>
+						<div class="card-body">
+							 <img src="https://source.unsplash.com/300x350/?pharmacy" alt="Image">
+						</div>
+						<div class="card-footer"><a href="MedicalSupplies.jsp"> Medicine</a></div>
+					</div>
+				</div>
+
+<!--				<div class="col-lg-4 col-12">
+					<div class="card text-center">
+						<div class="card-header">Stay Safe</div>
+						<div class="card-body"> <img src="https://source.unsplash.com/300x350/?ambulance" alt="Image" style=""></div>
+						<div class="card-footer"><a href="#">Ambulance</a></div>
+					</div>
+				</div>-->
+
+
+				</div>
+	</section>
+
+	
 
 
 
@@ -400,7 +403,12 @@ width: 80%;
 		
 	})
 </script>
-
+<footer class="py-3" style="background-color:#008080">
+            <div class="container">
+                <p class="m-0 text-center text-white">Copyright &copy; Team@CovidCare</p>
+            </div>
+            <!-- /.container -->
+        </footer>
 
 
 

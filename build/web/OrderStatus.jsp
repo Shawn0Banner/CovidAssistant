@@ -323,7 +323,7 @@ a.btn {
 <body onLoad="noBack();" onpageshow="if (event.persisted) noBack();" onUnload="">
 <%
        %>
-<nav class="navbar navbar-expand-lg navbar-light fixed-top" style="background-color: green">
+<nav class="navbar navbar-expand-lg navbar-light fixed-top" style="background-color: #008080">
   <div class="container">
     <a class="navbar-brand" href="#">CovidCare</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -335,7 +335,7 @@ a.btn {
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav ml-auto">
         <li class="nav-item active">
-          <a class="nav-link" href="UserHome.jsp"><i class="fa fa-home" style="font-size:20px"></i></a>
+          <a class="nav-link" href="AdminHome.jsp"><i class="fa fa-home" style="font-size:20px"></i></a>
         </li>
         <li class="nav-item">
           <a class="nav-link" href="Logout"><i class="fa fa-power-off" style="font-size:20px"></i></a>
@@ -376,7 +376,7 @@ a.btn {
 
                         con = ConnectionProviderToDB.getConnectionObject().getConnection(inputFile);
 
-                        PreparedStatement ps1 = con.prepareStatement("SELECT orderId, orderType, totalPrice, orderDate, Status FROM covid_assistant.order WHERE status!='Cancelled'");
+                        PreparedStatement ps1 = con.prepareStatement("SELECT orderId, orderType, totalPrice, orderDate, Status FROM covid_assistant.order WHERE status!='Cancelled' OR status!='Delivered' ORDER BY orderDate DESC");
                          
                         ResultSet rs = ps1.executeQuery();
 
@@ -388,7 +388,7 @@ a.btn {
                         <td><%= rs.getString("totalPrice")%></td>
                         <td><%= rs.getString("orderDate")%></td>
                         <td><%= rs.getString("status")%></td>
-                       <td><button type="button" class="btn btn-primary" onclick="window.location.href = 'OrderStatus?orderId=<%= rs.getString("orderId")%>'">Update</button>
+                       <td><button type="button" class="btn btn-primary" onclick="window.location.href = 'OrderStatus?orderId=<%= rs.getString("orderId")%>'" style="background-color: #008080">Update</button>
                   </tr>
                     <%}
 

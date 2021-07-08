@@ -116,21 +116,21 @@
             .card-body{
                 /* height:400px;
                  width:300px;*/
-                background-color: #b30000;
+                background-color: #008080;
             }
 
             .card-footer{
-                background-color: #b30000;
+                background-color: white;
                 padding: 30px 0px;
             }
 
             .card-footer a{
-                border : 2px solid #fff;
+                border : 2px solid #008080;
                 border-radius: 100px;
                 margin: 0 5px;
                 padding: 10px 25px;
                 outline: none;
-                color: #fff;
+                color: #008080;
                 font-size: 1rem;
                 font-weight:400 ;
                 line-height: 1.4;
@@ -141,8 +141,8 @@
 
             .card:hover .card-footer a{
                 color: #fff;
-                background-color: #666666;
-                border : 2px solid #666666;
+                background-color: #008080;
+                border : 2px solid #008080;
                 text-decoration: none;
                 box-shadow: oo 20px 0 rgba(0,0,0,0.3);
             }
@@ -156,12 +156,12 @@
 
     </head>
 
-    <body id="page-top"> 
+    <body id="page-top" style="background: -webkit-linear-gradient(bottom, #6699ff, #b3ccff);"> 
 
         <% String adminName = (String) session.getAttribute("adminName"); %>
 
         <!-- Navigation -->
-        <nav class="navbar navbar-expand-lg navbar-light fixed-top" style="background-color: green">
+        <nav class="navbar navbar-expand-lg navbar-light fixed-top" style="background-color: #008080">
             <div class="container">
                 <a class="navbar-brand" href="#">CovidCare</a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -221,6 +221,12 @@
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
 
+        <footer class="py-3" style="background-color:#008080;color: white">
+            <div class="container">
+                <p class="m-0 text-center text-white">Copyright &copy; Team@CovidCare</p>
+            </div>
+            <!-- /.container -->
+        </footer>
 
     </body>
 

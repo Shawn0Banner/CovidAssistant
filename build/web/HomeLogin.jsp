@@ -145,7 +145,7 @@
                 height: 5px;
                 left: 50%;
                 position: absolute;
-                background: #ffff00;
+                background: white;
                 transition: width 0.3s ease 0s, left 0.3s ease 0s;
                 width: 0;
 
@@ -160,10 +160,57 @@
                 }
             }
         </style>
-    </head>
-    <body>
+        <script>
+            function validate(form)
+            {
+                name = form.name.value;
+                phone = form.phone.value;
+                password=form.password.value;
+                //value = document.getElementById('value').value;
 
-        <nav class="navbar navbar-inverse" style="background-color: green">
+                var form1 = document.getElementById('RegForm');
+
+                if (name == '') {
+                    alert('Enter a name');
+                    return false;
+                } else if(!isNaN(name)){
+                    alert('Name should be a String');
+                    return false;
+                }
+                else if (phone == '') {
+                    alert('Please enter a phone number');
+                    return false;
+                } else if (isNaN(phone)) {
+                    alert('phone number should be a number');
+                    return false;
+                }else if(phone.length!=10){
+                        alert('phone number should be of 10 digits');
+                    return false;
+                } else if (!isNaN(name)) {
+                    alert('Name should be a string');
+                    return false;
+                } else if (password.length<6) {
+                    alert('Password Should be of atleast 6 characters');
+                    return false;
+                }/* else if(value==''){
+                    alert('Please enter a value');
+                    return false;
+                } else if(isNaN(value)){
+                    alert('Value should be a number');
+                    return false;
+                } else if(!radio1.checked && !radio2.checked){
+                    alert('Please select a asset categroy');
+                    return false;
+                }*/ else{
+                    form1.setAttribute('action', 'Register');
+                    return true;
+                }
+            }
+        </script>
+    </head>
+    <body style="font-family: 'Roboto', sans-serif;">
+
+        <nav class="navbar navbar-inverse" style="background-color: #008080">
             <div class="container-fluid" >
                 <div class="navbar-header">
                     <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
@@ -264,7 +311,7 @@
                             <a href="#" id="cancel_reset"><i class="fas fa-angle-left"></i> Back</a>
                         </form> -->
 
-                        <form method="post" action="Register" class="form-signup">
+                        <form id="RegForm" method="post" action="Register" onsubmit="return validate(this)" class="form-signup">
                             <!-- <div class="social-login">
                                 <button class="btn facebook-btn social-btn" type="button"><span><i class="fab fa-facebook-f"></i> Sign up with Facebook</span> </button>
                             </div>
@@ -278,8 +325,9 @@
                             <input type="tel" id="user-email" name="phone" class="form-control" placeholder="Phone Number" required autofocus="">
                             <input type="text" id="user-pass" name="address" class="form-control" placeholder="Address" required autofocus="">
                             <input type="password" id="user-repeatpass" name="password" class="form-control" placeholder="Password" required autofocus="">
-
-                            <button class="btn btn-primary btn-block" type="submit"><i class="fas fa-user-plus"></i> Sign Up</button>
+                            
+                            <input class="btn btn-primary btn-block" type="submit" value="Sign Up">
+                            <!--<button class="btn btn-primary btn-block" type="submit"><i class="fas fa-user-plus"></i> Sign Up </button>-->
                             <a href="#" id="cancel_signup"><i class="fas fa-angle-left"></i> Back</a>
                         </form>
                         <br>
@@ -310,25 +358,26 @@
                     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
                     <script src="/script.js"></script>
                     <script type="text/javascript">
-                        function toggleResetPswd(e) {
-                            e.preventDefault();
-                            $('#logreg-forms .form-signin').toggle() // display:block or none
-                            $('#logreg-forms .form-reset').toggle() // display:block or none
-                        }
+            function toggleResetPswd(e) {
+                e.preventDefault();
+                $('#logreg-forms .form-signin').toggle() // display:block or none
+                $('#logreg-forms .form-reset').toggle() // display:block or none
+            }
 
-                        function toggleSignUp(e) {
-                            e.preventDefault();
-                            $('#logreg-forms .form-signin').toggle(); // display:block or none
-                            $('#logreg-forms .form-signup').toggle(); // display:block or none
-                        }
+            function toggleSignUp(e) {
+                e.preventDefault();
+                $('#logreg-forms .form-signin').toggle(); // display:block or none
+                $('#logreg-forms .form-signup').toggle(); // display:block or none
+            }
 
-                        $(() => {
-                            // Login Register Form
-                            $('#logreg-forms #forgot_pswd').click(toggleResetPswd);
-                            $('#logreg-forms #cancel_reset').click(toggleResetPswd);
-                            $('#logreg-forms #btn-signup').click(toggleSignUp);
-                            $('#logreg-forms #cancel_signup').click(toggleSignUp);
-                        })
+            $(() => {
+                // Login Register Form
+                $('#logreg-forms #forgot_pswd').click(toggleResetPswd);
+                $('#logreg-forms #cancel_reset').click(toggleResetPswd);
+                $('#logreg-forms #btn-signup').click(toggleSignUp);
+                $('#logreg-forms #cancel_signup').click(toggleSignUp);
+            })
+
                     </script>
 
 
@@ -340,7 +389,7 @@
         </div>
 
         <div class="container text-center">    
-            <h3>What We Do</h3>
+            <h3 style="color: #008080">What We Do</h3>
             <br>
             <div class="row">
                 <div class="col-sm-3">
@@ -372,7 +421,7 @@
         </div>
 
         <div class="container text-center">    
-            <h3>Our Partners</h3>
+            <h3 style="color: #008080">Our Partners</h3>
             <br>
             <div class="row">
                 <div class="col-sm-2">
@@ -404,8 +453,11 @@
 
 
 
-        <footer class="container-fluid text-center">
-            <p>Footer Text</p>
+        <footer class="py-3" style="background-color:#008080;color: white">
+            <div class="container">
+                <p class="m-0 text-center text-white">Copyright &copy; Team@CovidCare</p>
+            </div>
+            <!-- /.container -->
         </footer>
 
     </body>

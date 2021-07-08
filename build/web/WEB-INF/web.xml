@@ -61,6 +61,10 @@
         <servlet-name>UpdateStatus</servlet-name>
         <servlet-class>ca.servlet.UpdateStatus</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>ItemStatus</servlet-name>
+        <servlet-class>ca.servlet.ItemStatus</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>action</servlet-name>
         <url-pattern>*.do</url-pattern>
@@ -108,6 +112,10 @@
     <servlet-mapping>
         <servlet-name>UpdateStatus</servlet-name>
         <url-pattern>/UpdateStatus</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ItemStatus</servlet-name>
+        <url-pattern>/ItemStatus</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
