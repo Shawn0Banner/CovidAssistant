@@ -45,6 +45,9 @@ public class ConfirmOrder extends HttpServlet {
            String totalPrice = request.getParameter("totalPrice");
            int cp = Integer.parseInt(request.getParameter("cp"));
            String status = "Order Placed";
+           System.out.println(userId);
+            System.out.println(cp);
+             System.out.println(totalPrice);
             Connection conn = null;
 
         InputStream inputFile = getServletContext().getResourceAsStream("/WEB-INF/db_params.properties");
@@ -58,19 +61,24 @@ public class ConfirmOrder extends HttpServlet {
             ps.setString(5, address );
             int r = 0;
             r = ps.executeUpdate();
-
+System.out.println(userId);
+            
                     if (r > 0) {
                         System.out.println("Order Placed");
-                         PreparedStatement ps1 = conn.prepareStatement("Update user SET creditPoints=? WHERE userId=?");
+                         PreparedStatement ps1 = conn.prepareStatement("Update covid_assistant.user SET creditPoints=? WHERE userId=?");
                          ps1.setInt(1, cp);
                          ps1.setInt(2, userId);
                          int r1 = 0;
                          r1 = ps1.executeUpdate();
+                         System.out.println(userId);
+            
                          if(r1 > 0){
                              User user = (User) request.getSession().getAttribute("user");
                              cp = cp + 25;
                              user.setCreditPoints(cp);
                         request.setAttribute("userId", userId);
+                        System.out.println(userId);
+           
                         RequestDispatcher rd = request.getRequestDispatcher("MyOrders.jsp");
                         rd.forward(request, response);
                          }

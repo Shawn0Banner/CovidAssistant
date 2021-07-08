@@ -376,7 +376,7 @@ a.btn {
 
                         con = ConnectionProviderToDB.getConnectionObject().getConnection(inputFile);
 
-                        PreparedStatement ps1 = con.prepareStatement("SELECT orderId, orderType, totalPrice, orderDate, Status FROM covid_assistant.order WHERE status!='Cancelled' OR status!='Delivered' ORDER BY orderDate DESC");
+                        PreparedStatement ps1 = con.prepareStatement("SELECT orderId, orderType, totalPrice, orderDate, Status FROM covid_assistant.order WHERE status='Order Placed' OR status='Out For Delivery' ORDER BY orderDate DESC");
                          
                         ResultSet rs = ps1.executeQuery();
 

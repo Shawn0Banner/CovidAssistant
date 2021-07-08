@@ -208,7 +208,7 @@
                                         <input type="hidden" name="Type" value="Medical Supplies" />
                                         <input type="hidden" name="CP" id="CP" />
                                     </div>
-                                    <button class="btn btn-primary text-uppercase" type="submit" style="background-color:#008080;color:white">Checkout</button>
+                                    <button id="checkout" class="btn btn-primary text-uppercase" type="submit" style="background-color:#008080;color:white" disabled="true">Checkout</button>
                                 </form>
                             </div>
 
@@ -290,6 +290,7 @@
                     product_total_amt.innerHTML = parseInt(product_total_amt.innerHTML) - parseInt(price.innerHTML);
                     total_cart_amt.innerHTML = parseInt(product_total_amt.innerHTML) + parseInt(shipping_charge.innerHTML);
                     Total.value = total_cart_amt.innerHTML;
+                    CP.value = credit_points1.value;
                 }
             }
             const increaseNumber = (incdec, itemprice, iprice) => {
@@ -308,7 +309,10 @@
                     product_total_amt.innerHTML = parseInt(product_total_amt.innerHTML) + parseInt(price.innerHTML);
                     total_cart_amt.innerHTML = parseInt(product_total_amt.innerHTML) + parseInt(shipping_charge.innerHTML);
                     Total.value = total_cart_amt.innerHTML;
+                    CP.value = credit_points1.value;
+              
                 }
+                document.getElementById('checkout').disabled = false;
             }
 
             const  discount_code = () => {

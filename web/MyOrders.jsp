@@ -379,7 +379,7 @@ a.btn {
 
                         con = ConnectionProviderToDB.getConnectionObject().getConnection(inputFile);
 
-                        PreparedStatement ps1 = con.prepareStatement("SELECT orderId, orderType, totalPrice, orderDate, status FROM covid_assistant.order WHERE userId=? AND status='Order Placed' OR status='Out For Delivery' order by orderId desc");
+                        PreparedStatement ps1 = con.prepareStatement("SELECT orderId, orderType, totalPrice, orderDate, status FROM covid_assistant.order WHERE userId=? AND (status='Order Placed' OR status='Out For Delivery') order by orderId desc");
                          ps1.setInt(1, user.getUserId());
                         ResultSet rs = ps1.executeQuery();
 
@@ -416,7 +416,7 @@ a.btn {
 
                         con = ConnectionProviderToDB.getConnectionObject().getConnection(inputFile);
 
-                        PreparedStatement ps2 = con.prepareStatement("SELECT orderId, orderType, totalPrice, orderDate, status FROM covid_assistant.order WHERE userId=? AND status='Cancelled' OR status='Delivered' order by orderId desc");
+                        PreparedStatement ps2 = con.prepareStatement("SELECT orderId, orderType, totalPrice, orderDate, status FROM covid_assistant.order WHERE userId=? AND (status='Cancelled' OR status='Delivered') order by orderId desc");
                          ps2.setInt(1, user.getUserId());
                         ResultSet rs2 = ps2.executeQuery();
 

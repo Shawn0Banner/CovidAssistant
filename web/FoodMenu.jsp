@@ -207,7 +207,7 @@
                                     <input type="hidden" name="CP" id="CP" />
                                 </div>
                           
-                                    <button type="submit" class="btn text-uppercase" style="background-color:#008080;color:white;">Checkout</button>
+                                    <button id="checkout" type="submit" class="btn text-uppercase" style="background-color:#008080;color:white;" disabled="true">Checkout</button>
                                 </form>
                             </div>
                            
@@ -278,6 +278,7 @@
 
                                                     if (itemval.value <= 0) {
                                                         itemval.value = 0;
+                                                        
                                                         alert('Negative quantity not allowed');
                                                     } else {
                                                         itemval.value = parseInt(itemval.value) - 1;
@@ -287,6 +288,7 @@
                                                         product_total_amt.innerHTML = parseInt(product_total_amt.innerHTML) - parseInt(price.innerHTML);
                                                         total_cart_amt.innerHTML = parseInt(product_total_amt.innerHTML) + parseInt(shipping_charge.innerHTML);
                                                         Total.value=total_cart_amt.innerHTML;
+                                                        CP.value = credit_points1.value;
                                                     }
                                                 }
                                                 const increaseNumber = (incdec, itemprice, iprice) => {
@@ -305,7 +307,10 @@
                                                         product_total_amt.innerHTML = parseInt(product_total_amt.innerHTML) + parseInt(price.innerHTML);
                                                         total_cart_amt.innerHTML = parseInt(product_total_amt.innerHTML) + parseInt(shipping_charge.innerHTML);
                                                         Total.value = total_cart_amt.innerHTML;
+                                                        CP.value = credit_points1.value;
+                                                        
                                                     }
+                                                    document.getElementById('checkout').disabled = false;
                                                 }
 
                                                 const  discount_code = () => {

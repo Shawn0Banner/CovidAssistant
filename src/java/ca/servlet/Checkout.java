@@ -36,13 +36,24 @@ public class Checkout extends HttpServlet {
         String cp = request.getParameter("CP");
        System.out.println(cp);
         try (PrintWriter out = response.getWriter()) {
-           
+           double zeroTotal = Double.parseDouble(total);
+           System.out.print(zeroTotal);
+           if(zeroTotal<=50 && type.equalsIgnoreCase("Food")){
+               out.print("<script>alert('Please Choose item to order!!'); window.location.href='FoodMenu.jsp';</script>");
+                        RequestDispatcher rd = request.getRequestDispatcher("FoodMenu.jsp");
+                        rd.include(request, response);
+           }
+           else if(zeroTotal<=20 && type.equalsIgnoreCase("Medical Supplies")){
+               out.print("<script>alert('Please Choose item to order!!'); window.location.href='MedicalSupplies.jsp';</script>");
+                        RequestDispatcher rd = request.getRequestDispatcher("MedicalSupplies.jsp");
+                        rd.include(request, response);
+           }else{
            request.setAttribute("total", total);
             request.setAttribute("type", type);
             request.setAttribute("cp", cp);
             RequestDispatcher rd = request.getRequestDispatcher("pay.jsp");
             rd.forward(request, response);
-        
+           }
             
         }
     }

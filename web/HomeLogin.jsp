@@ -14,6 +14,8 @@
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+        <!-- Custom styles for this template -->
+        <link href="css/scrolling-nav.css" rel="stylesheet">
         <style>
             #logreg-forms{
                 width:412px;
@@ -223,9 +225,9 @@
                 <div class="collapse navbar-collapse" id="myNavbar">
                     <ul class="nav navbar-nav">
                         <li><a href="AdminLogin.jsp" class="navbtn" style="color:white;margin-left: 825px">Admin</a></li>
-                        <li><a href="#" class="navbtn" style="color:white">About</a></li>
+                        <li><a href="#about" class="navbtn js-scroll-trigger" style="color:white">About</a></li>
                         <!-- <li><a href="#">Projects</a></li> -->
-                        <li><a href="#" class="navbtn" style="color:white">Contact</a></li>
+                        <li><a href="#contact" class="navbtn js-scroll-trigger" style="color:white">Contact</a></li>
                     </ul>
                     <!--  <ul class="nav navbar-nav navbar-right">
                        <li><a href="#"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
@@ -265,7 +267,7 @@
                             <div class="item">
                                 <img src="https://source.unsplash.com/800x400/?emergency,hospital" alt="Image">
                                 <div class="carousel-caption">
-                                    <h3>Food Delivery</h3>
+                                    <h3>Quick Service</h3>
                                     <p></p>
                                 </div>      
                             </div>
@@ -387,69 +389,90 @@
             </div>
             <hr>
         </div>
-
+<section id="about">
         <div class="container text-center">    
             <h3 style="color: #008080">What We Do</h3>
             <br>
             <div class="row">
                 <div class="col-sm-3">
                     <img src="https://source.unsplash.com/1600x400/?healthcare,medicine" class="img-responsive" style="width:100%" alt="Image">
-                    <!-- <p>Current Project</p> -->
+                    
+                     <h4>We bring medical supplies at your  door step </h4> 
                 </div>
                 <div class="col-sm-3"> 
+                    <img src="https://source.unsplash.com/1600x400/?Healthcare,hospital" class="img-responsive" style="width:100%" alt="Image">
+                     <h4>Avail all types of medicines just for you</h4>     
+                </div>
+                <div class="col-sm-3">
                     <img src="https://source.unsplash.com/1600x400/?cuisine,food" class="img-responsive" style="width:100%" alt="Image">
-                    <!-- <p>Project 2</p> -->    
+                                         <h4>Homemade food delivered to you </h4>     
                 </div>
                 <div class="col-sm-3">
-                    <div class="well">
-                        <!-- <p>Some text..</p> -->
-                    </div>
-                    <div class="well">
-                        <!-- <p>Some text..</p> -->
-                    </div>
-                </div>
-                <div class="col-sm-3">
-                    <div class="well">
-                        <!-- <p>Some text..</p> -->
-                    </div>
-                    <div class="well">
-                        <!-- <p>Some text..</p> -->
-                    </div>
+                    <img src="https://source.unsplash.com/1600x400/?cuisine,restaurant" class="img-responsive" style="width:100%" alt="Image">
+                                         <h4>Perfect solution for family in these difficult times</h4>     
                 </div>  
             </div>
-            <hr>
+           
         </div>
-
-        <div class="container text-center">    
+    <br><br><br><br><br>
+    <div class="container text-center">    
             <h3 style="color: #008080">Our Partners</h3>
             <br>
             <div class="row">
-                <div class="col-sm-2">
-                    <img src="https://placehold.it/150x80?text=IMAGE" class="img-responsive" style="width:100%" alt="Image">
-                    <p>Partner 1</p>
+                <div class="col-sm-3">
+                    <img src="http://assets.stickpng.com/thumbs/5847f880cef1014c0b5e48ac.png" class="img-responsive" style="width:80%;height:150px" alt="Image">
+                    
                 </div>
-                <div class="col-sm-2"> 
-                    <img src="https://placehold.it/150x80?text=IMAGE" class="img-responsive" style="width:100%" alt="Image">
-                    <p>Partner 2</p>    
+                <div class="col-sm-3"> 
+                    <img src="https://www.healthism.co/wp-content/uploads/2021/04/Apollo-Clinics-91.jpe" class="img-responsive" style="width:80%;height:150px" alt="Image">
+                          
                 </div>
-                <div class="col-sm-2"> 
-                    <img src="https://placehold.it/150x80?text=IMAGE" class="img-responsive" style="width:100%" alt="Image">
-                    <p>Partner 3</p>
+                <div class="col-sm-3">
+                    <img src="https://s3-ap-southeast-1.amazonaws.com/static-pp/pp-web-app-assets/logo-carriers/square-logo-carries/blueda.png" class="img-responsive" style="width:80%;height:150px" alt="Image">
+                                              
                 </div>
-                <div class="col-sm-2"> 
-                    <img src="https://placehold.it/150x80?text=IMAGE" class="img-responsive" style="width:100%" alt="Image">
-                    <p>Partner 4</p>
-                </div> 
-                <div class="col-sm-2"> 
-                    <img src="https://placehold.it/150x80?text=IMAGE" class="img-responsive" style="width:100%" alt="Image">
-                    <p>Partner 5</p>
-                </div>     
-                <div class="col-sm-2"> 
-                    <img src="https://placehold.it/150x80?text=IMAGE" class="img-responsive" style="width:100%" alt="Image">
-                    <p>Partner 6</p>
-                </div> 
+                <div class="col-sm-3">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/27/Patanjali_Logo.svg/1200px-Patanjali_Logo.svg.png" class="img-responsive" style="width:80%;height:150px" alt="Image">
+                                            
+                </div>  
             </div>
-        </div><br>
+           
+        </div>
+</section>
+        <section id="contact">
+        <div class="container text-center">    
+            <h3 style="color: #008080">Our Team</h3>
+            <br>
+            <div class="row">
+                <div class="col-sm-2">
+                    <img src="Pictures/Esa.jpeg" class="img-responsive" style="width:100%" alt="Image">
+                    <p>Esa Chatterjee</p>
+                </div>
+                <div class="col-sm-2"> 
+                    <img src="Pictures/Sayantan.jpeg" class="img-responsive" style="width:100%" alt="Image">
+                    <p>Sayantan Banerjee</p>    
+                </div>
+                <div class="col-sm-2"> 
+                    <img src="Pictures/Tanmoy.jpeg" class="img-responsive" style="width:100%" alt="Image">
+                    <p>Tanmoy Saha</p>
+                </div>
+                <div class="col-sm-2"> 
+                    <img src="Pictures/Tanisha.jpeg" class="img-responsive" style="width:100%" alt="Image">
+                    <p>Tanisha Kumar</p>
+                </div> 
+                <div class="col-sm-2"> 
+                    <img src="Pictures/Arpan.jpeg" class="img-responsive" style="width:100%" alt="Image">
+                    <p>Arpan Saha</p>
+                </div> 
+                <div class="col-sm-2"> 
+                    <img src="Pictures/Sonali.jpg" class="img-responsive" style="width:100%" alt="Image">
+                    <p>Sonali Santra</p>
+                </div>     
+                
+            </div>
+        </div>
+        </section>
+        <br>
 
 
 
@@ -459,8 +482,14 @@
             </div>
             <!-- /.container -->
         </footer>
+        <script src="vendor/jquery/jquery.min.js"></script>
+        <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
+        <!-- Plugin JavaScript -->
+        <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
+<script src="js/scrolling-nav.js"></script>
     </body>
+    
 </html>
 
 

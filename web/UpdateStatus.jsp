@@ -28,17 +28,18 @@
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 
 
-        <title>Track Asset</title>
+        <title>Update Status</title>
 
 
 
-        <style type="text/css">
+      <style type="text/css">
 
             @import url('https://fonts.googleapis.com/css?family=Mukta');
             body{
                 font-family: 'Mukta', sans-serif;
                 height:100vh;
-                min-height:550px;                
+                min-height:550px;
+                background-image: url(http://www.planwallpaper.com/static/images/Free-Wallpaper-Nature-Scenes.jpg);
                 background-repeat: no-repeat;
                 background-size:cover;
                 background-position:center;
@@ -58,7 +59,7 @@
                 right:0;left:0;
                 margin:auto;
                 height:400px;
-                background-color: #cc0000;
+                background: -webkit-linear-gradient(top, #6699ff, #b3ccff);
             }
             .white-panel{
                 background-color: rgba(255,255, 255, 1);
@@ -76,11 +77,11 @@
                 display:none;
             }
             .login-reg-panel{
-                color:#B8B8B8;
+                color:white;
             }
             .login-reg-panel #label-login, 
             .login-reg-panel #label-register{
-                border:1px solid #9E9E9E;
+                border:1px solid white;
                 padding:5px 5px;
                 width:150px;
                 display:block;
@@ -187,13 +188,23 @@
                 color:#2c7715;
             }
 
+            .btnSubmit{
+                font-weight: 600;
+                width: 50%;
+                color: #282726;
+                background-color: #fff;
+                border: none;
+                border-radius: 1.5rem;
+                padding:2%;
+            }
+
             .navbar .navbar-nav .nav-link {
-                color: #cc0000;
+                color: #008080;
                 font-size: 1.1em;
                 position: relative;
             }
             .navbar .navbar-nav .nav-link:hover {
-                color: #cc0000;
+                color: white;
             }
             .navbar .navbar-nav .nav-link::after {
                 position: absolute;
@@ -201,7 +212,7 @@
                 left: 0;
                 right: 0;
                 margin: auto;
-                background-color: #cc0000;
+                background-color: white;
                 color: transparent;
                 width: 0%;
                 content: '.';
@@ -241,10 +252,10 @@
 
     <body onload="myFunc()">
 
-        <nav class="navbar navbar-expand-lg navbar-dark fixed-top" style="background-color: green" id="mainNav">
+        <nav class="navbar navbar-expand-lg navbar-dark fixed-top" style="background-color: #008080" id="mainNav">
             <div class="container">
                 <a class="navbar-brand" href="#">
-                   Care4U
+                   CovidCare
                 </a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
@@ -279,12 +290,12 @@
             <div class="register-info-box">
                 <br>
                 <br>
-                <h4>A report will be generated according to the selected department</h4>                
+                <h4>Update order status of your Customers</h4>                
             </div>
 
             <div class="white-panel">
                 <div class="login-show">
-                    <h2>Track Asset Details</h2>
+                    <h2>Update Order Status</h2>
                     <br><br>
                     <form method="post" id="trackForm" action="UpdateStatus">
                          <input type="text" name="orderId" class="form-control" placeholder="Enter Item Name" value="<%=orderId%>" readonly="readonly"/>
@@ -306,7 +317,7 @@
                             <label class="custom-control-label" for="customRadio2">Departmental Asset</label>
                         </div>-->
                         <br><br>                            
-                        <input type="submit" value="Update" class="btn btn-dark" style="float:right;padding-right: 20px;padding-left: 20px">
+                        <input type="submit" value="Update" class="btn btn-dark" style="float:right;padding-right: 20px;padding-left: 20px;background-color: #008080">
                     </form>                    
                 </div>
                 <div class="register-show">
@@ -347,7 +358,7 @@
 
 
         <!-- Footer -->
-        <footer class="py-3  fixed-bottom" style="background-color: green">
+        <footer class="py-3  fixed-bottom" style="background-color: #008080">
             <div class="container">
                 <p class="m-0 text-center text-white">Copyright &copy; Team@CovidCare</p>
             </div>
